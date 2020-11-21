@@ -1,3 +1,3 @@
-protocol MovieListFavoriteInteractorType {    
+protocol MovieListFavoriteInteractorType {
     func toggleMovieFavorite(_ movie: Movie)
 }

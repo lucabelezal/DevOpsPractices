@@ -1,3 +1,3 @@
-protocol ReusableView {    
+protocol ReusableView {
     static var reuseIdentifier: String { get }
 }

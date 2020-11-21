@@ -1,9 +1,7 @@
 import Moya
 
 extension MoyaProvider {
-    
-    func requestDecodable<T: Decodable>(_ target: Target, jsonDecoder: JSONDecoder, _ completion: @escaping (Result<T>) -> ()) {
-        
+    func requestDecodable<T: Decodable>(_ target: Target, jsonDecoder: JSONDecoder, _ completion: @escaping (Result<T>) -> Void) {
         request(target) { result in
             switch result {
             case .success(let value):

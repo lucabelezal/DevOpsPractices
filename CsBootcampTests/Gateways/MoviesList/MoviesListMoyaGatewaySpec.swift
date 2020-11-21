@@ -1,27 +1,22 @@
 @testable
 import CsBootcamp
 
-import Quick
 import Nimble
 import OHHTTPStubs
+import Quick
 
 class MoviesListMoyaGatewaySpec: QuickSpec {
-
     override func spec() {
-
         describe("MoviesListMoyaGateway") {
-
             let gateway = MoviesListMoyaGateway()
 
             let page = 1
 
             beforeEach {
-
                 let target = MovieTarget.popular(page)
                 let host = target.baseURL.host!
 
-                stub(condition: isHost(host)) { (request) -> HTTPStubsResponse in
-
+                stub(condition: isHost(host)) { _ -> HTTPStubsResponse in
                     let path = Bundle(for: MoviesListMoyaGatewaySpec.self).path(forResource: "movies_list", ofType: "json")!
                     return fixture(filePath: path, headers: nil)
                 }
@@ -32,7 +27,6 @@ class MoviesListMoyaGatewaySpec: QuickSpec {
             }
 
             context("when fetch movies") {
-
                 var movies: [Movie]?
 
                 beforeEach {

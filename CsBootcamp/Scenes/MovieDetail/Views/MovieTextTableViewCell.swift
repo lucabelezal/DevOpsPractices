@@ -1,19 +1,17 @@
 import UIKit
 
 public final class MovieTextTableViewCell: UITableViewCell {
-    
-    static var cellHeight: CGFloat = CGFloat(44).proportionalToWidth
-    
+    static var cellHeight = CGFloat(44).proportionalToWidth
+
     lazy var textLabelCell: UILabel = {
-       
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = UIColor.black
-        
+
         return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -25,15 +23,15 @@ public final class MovieTextTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         return nil
     }
-    
+
     func setup(viewModel: ViewModel) {
         self.textLabelCell.text = viewModel.description
     }
-    
+
     private func setupViewHierarchy() {
         contentView.addSubview(textLabelCell)
     }
-    
+
     private func setupConstraints() {
         textLabelCell
             .topAnchor(equalTo: contentView.topAnchor)
@@ -44,10 +42,7 @@ public final class MovieTextTableViewCell: UITableViewCell {
 }
 
 extension MovieTextTableViewCell {
-    
     struct ViewModel {
-
         let description: String
     }
 }
-

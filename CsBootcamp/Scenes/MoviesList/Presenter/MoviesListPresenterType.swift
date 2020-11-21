@@ -4,7 +4,6 @@ protocol MoviesListPresenterType {
 }
 
 struct FetchMoviesListResponse: Equatable {
-    
     let posterPath: String
     let title: String
     let isFavorite: Bool

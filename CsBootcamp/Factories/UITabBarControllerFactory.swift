@@ -1,7 +1,6 @@
 import UIKit
 
 final class UITabBarControllerFactory {
-    
     static func make(with viewControllers: UIViewController...) -> UITabBarController {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.barTintColor = UIColor.Bootcamp.yellow

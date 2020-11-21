@@ -1,29 +1,24 @@
 @testable
 import CsBootcamp
 
-import Quick
 import Nimble
+import Quick
 
 class MoviesListViewControllerSpec: QuickSpec {
-    
     override func spec() {
-        
         describe("MoviesListViewController") {
-            
             var viewController: MoviesListViewController!
-            
+
             context("when initialized") {
-                
                 beforeEach {
                     viewController = MoviesListViewController()
                 }
-                
+
                 it("should set the title") {
                     expect(viewController.title).to(match("Movies"))
                 }
-                
+
                 it("should setup the view hierarchy") {
-                   
                     let expectedSubviews: [UIView] = [
                         viewController.collectionView,
                         viewController.activityIndicator,
@@ -32,31 +27,27 @@ class MoviesListViewControllerSpec: QuickSpec {
                     expect(viewController.view.subviews)
                         .to(contain(expectedSubviews))
                 }
-                
+
                 context("and view will appear") {
-                    
                     let interactor = MoviesListInteractorSpy()
-                    
+
                     beforeEach {
                         viewController.listInteractor = interactor
                         viewController.beginAppearanceTransition(true, animated: false)
                         viewController.endAppearanceTransition()
                     }
-                    
+
                     it("should change to loading state") {
-                        
                         expect(viewController.activityIndicator.isAnimating)
                             .to(beTrue())
                     }
-                    
+
                     it("should fetch movies") {
-                        
-                        expect(interactor.fetchMoviesCalled).to(beTrue())
+                        expect(interactor.fetchMoviesCalled) == true
                     }
                 }
-                
+
                 context("and display movies is called") {
-                    
                     let viewModel = MoviesListViewModel(cellViewModels: (0..<3).map { _ in
                         MovieCollectionViewCell.ViewModel(
                             imageURL: URL(string: "url.com")!,
@@ -65,38 +56,31 @@ class MoviesListViewControllerSpec: QuickSpec {
                         )
                     })
                     beforeEach {
-                        
                         viewController.displayMovies(viewModel: viewModel)
                     }
-                    
+
                     it("should change to list state") {
-                        
-                        expect(viewController.collectionView.isHidden).to(beFalse())
+                        expect(viewController.collectionView.isHidden) == false
                     }
-                    
+
                     it("should set viewmodels to data source") {
-                        
                         expect(viewController.dataSource.viewModels)
                             .to(equal(viewModel.cellViewModels))
                     }
                 }
-                
+
                 context("and display error is called") {
-                    
                     let errorViewModel = MoviesListErrorViewModel.defaultError
-                    
+
                     beforeEach {
-                        
                         viewController.displayError(viewModel: errorViewModel)
                     }
-                    
+
                     it("should change to error state") {
-                        
-                        expect(viewController.errorView.isHidden).to(beFalse())
+                        expect(viewController.errorView.isHidden) == false
                     }
-                    
+
                     it("should setup error view") {
-                        
                         expect(viewController.errorView.imageView.image)
                             .to(equal(errorViewModel.image))
                         expect(viewController.errorView.label.text)
@@ -104,66 +88,62 @@ class MoviesListViewControllerSpec: QuickSpec {
                     }
                 }
             }
-                        
+
             describe("State") {
-                
                 var state: MoviesListViewController.State!
-                
+
                 context("list") {
-                    
                     beforeEach {
                         state = .list([])
                     }
-                    
+
                     it("should return collection view not hidden flag") {
-                        expect(state.hidesCollectionView).to(beFalse())
+                        expect(state.hidesCollectionView) == false
                     }
-                    
+
                     it("should return error view hidden flag") {
-                        expect(state.hidesErrorView).to(beTrue())
+                        expect(state.hidesErrorView) == true
                     }
-                    
+
                     it("should return not animates activity indicator") {
-                        expect(state.animatesActivityIndicator).to(beFalse())
+                        expect(state.animatesActivityIndicator) == false
                     }
                 }
-                
+
                 context("loading") {
-                    
                     beforeEach {
                         state = .loading
                     }
-                    
+
                     it("should return collection view hidden flag") {
-                        expect(state.hidesCollectionView).to(beFalse())
+                        expect(state.hidesCollectionView) == false
                     }
-                    
+
                     it("should return error view hidden flag") {
-                        expect(state.hidesErrorView).to(beTrue())
+                        expect(state.hidesErrorView) == true
                     }
-                    
+
                     it("should return animates activity indicator") {
-                        expect(state.animatesActivityIndicator).to(beTrue())
+                        expect(state.animatesActivityIndicator) == true
                     }
                 }
-                
+
                 context("error") {
-                    
                     beforeEach {
                         let errorViewModel = MoviesListErrorViewModel.defaultError
                         state = .error(errorViewModel)
                     }
-                    
+
                     it("should return collection view hidden flag") {
-                        expect(state.hidesCollectionView).to(beTrue())
+                        expect(state.hidesCollectionView) == true
                     }
-                    
+
                     it("should return error view not hidden flag") {
-                        expect(state.hidesErrorView).to(beFalse())
+                        expect(state.hidesErrorView) == false
                     }
-                    
+
                     it("should return not animates activity indicator") {
-                        expect(state.animatesActivityIndicator).to(beFalse())
+                        expect(state.animatesActivityIndicator) == false
                     }
                 }
             }
@@ -172,18 +152,16 @@ class MoviesListViewControllerSpec: QuickSpec {
 }
 
 class MoviesListInteractorSpy: MoviesListInteractorType {
-    
     var fetchMoviesCalled = false
-    
+
     func fetchMovies(from page: Int) {
         fetchMoviesCalled = true
     }
-    
+
     func movie(at index: Int) -> Movie {
         return Movie(id: 1, genreIds: [], title: "", overview: "", releaseDate: Date(), posterPath: "www.com")
     }
-    
+
     func reloadMovies() {
-        
     }
 }

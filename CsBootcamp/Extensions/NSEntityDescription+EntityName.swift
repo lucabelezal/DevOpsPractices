@@ -1,7 +1,6 @@
 import CoreData
 
 extension NSEntityDescription {
-    
     static func insertNewObject<T: NSManagedObject>(
         ofType type: T.Type,
         into context: NSManagedObjectContext

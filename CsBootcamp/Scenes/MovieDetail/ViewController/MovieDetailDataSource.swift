@@ -1,17 +1,16 @@
 import UIKit
 
 final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-    
     private unowned let tableView: UITableView
-    
+
     var viewModel: MovieDetailViewController.ViewModel? {
         didSet {
              tableView.reloadData()
         }
     }
-    
-    var favoriteButtonTapped: (() -> ())?
-    
+
+    var favoriteButtonTapped: (() -> Void)?
+
     init(tableView: UITableView) {
         self.tableView = tableView
         super.init()
@@ -20,19 +19,18 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
         tableView.dataSource = self
         tableView.reloadData()
     }
-    
+
     private func registerCells(in tavleView: UITableView) {
         tableView.register(MoviePosterTableViewCell.self)
         tableView.register(MovieTextTableViewCell.self)
         tableView.register(MovieOverviewTableViewCell.self)
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell?
         switch indexPath.row {
         case 0:
@@ -62,10 +60,10 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
             cell = overviewCell
         default: cell = nil
         }
-        
+
         return cell ?? UITableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
@@ -80,7 +78,7 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
     }

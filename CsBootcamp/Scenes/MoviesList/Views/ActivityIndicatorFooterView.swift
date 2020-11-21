@@ -1,9 +1,8 @@
 import UIKit
 
 final class ActivityIndicatorFooterView: UICollectionReusableView {
-    
     weak var activityIndicator: UIActivityIndicatorView?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -12,14 +11,13 @@ final class ActivityIndicatorFooterView: UICollectionReusableView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setup(activityIndicator: UIActivityIndicatorView) {
         setupViewHierarchy(activityIndicator: activityIndicator)
         setupConstraints(activityIndicator: activityIndicator)
     }
-    
-    private func setupViewHierarchy(activityIndicator: UIActivityIndicatorView) {
 
+    private func setupViewHierarchy(activityIndicator: UIActivityIndicatorView) {
         self.addSubview(activityIndicator)
     }
 

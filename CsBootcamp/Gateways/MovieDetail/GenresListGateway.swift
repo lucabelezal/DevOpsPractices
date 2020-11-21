@@ -1,3 +1,3 @@
 protocol GenresListGateway {
-    func fetchGenres(_ completion: @escaping (Result<[Genre]>) -> ())
+    func fetchGenres(_ completion: @escaping (Result<[Genre]>) -> Void)
 }

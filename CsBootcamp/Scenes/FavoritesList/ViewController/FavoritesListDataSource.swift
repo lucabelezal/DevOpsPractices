@@ -1,11 +1,10 @@
 import UIKit
 
 final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-
     private weak var tableView: UITableView?
-    var didUnfavoriteItemAtIndex: ((Int) -> ())?
-    var searchDidReturnCount: ((String, Int) -> ())?
-    
+    var didUnfavoriteItemAtIndex: ((Int) -> Void)?
+    var searchDidReturnCount: ((String, Int) -> Void)?
+
     var searchPredicate: String = "" {
         didSet {
             if oldValue != searchPredicate {
@@ -21,7 +20,6 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
     }
 
     var filteredViewModels: [(Int, FavoriteTableViewCell.ViewModel)] {
-
         let enumeratedViewModels = self.viewModels.enumerated().map { $0 }
 
         let viewModels = searchPredicate.isEmpty ?
@@ -46,17 +44,14 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
     }
 
     private func registerCells(in tableView: UITableView) {
-
         tableView.register(FavoriteTableViewCell.self)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return filteredViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(FavoriteTableViewCell.self, for: indexPath)!
         cell.setup(viewModel: filteredViewModels[indexPath.row].1)
 
@@ -64,12 +59,11 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-
         return true
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .destructive, title: "Unfavorite") {  (contextualAction, view, boolValue) in
+        let contextItem = UIContextualAction(style: .destructive, title: "Unfavorite") {  _, _, _ in
             self.didUnfavoriteItemAtIndex?(self.filteredViewModels[indexPath.row].0)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -79,12 +73,10 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
     // MARK: - UITableView Delegate
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         return FavoriteTableViewCell.cellHeight
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
         return CGFloat.leastNonzeroMagnitude
     }
 }

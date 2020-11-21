@@ -1,7 +1,6 @@
 import CoreData
 
 extension MovieCoreData {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MovieCoreData> {
         return NSFetchRequest<MovieCoreData>(entityName: entityName)
     }
@@ -12,11 +11,9 @@ extension MovieCoreData {
     @NSManaged public var releaseDate: Date
     @NSManaged public var posterPath: String
     @NSManaged public var genres: NSOrderedSet
-
 }
 
 extension MovieCoreData {
-
     @objc(insertObject:inGenresAtIndex:)
     @NSManaged public func insertIntoGenres(_ value: GenreCoreData, at idx: Int)
 
@@ -46,5 +43,4 @@ extension MovieCoreData {
 
     @objc(removeGenres:)
     @NSManaged public func removeFromGenres(_ values: NSOrderedSet)
-
 }

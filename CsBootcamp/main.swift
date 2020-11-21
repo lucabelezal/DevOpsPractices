@@ -10,4 +10,3 @@ UIApplicationMain(argc, argv, nil, NSStringFromClass(UnitTestAppDelegate.self))
 #else
 UIApplicationMain(argc, argv, nil, NSStringFromClass(AppDelegate.self))
 #endif
-

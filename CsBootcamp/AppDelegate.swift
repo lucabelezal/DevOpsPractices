@@ -1,7 +1,6 @@
 import UIKit
 
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     private var genresCacher: GenresCacher?
 
@@ -9,7 +8,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        
         let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         print(docsPath)
 
