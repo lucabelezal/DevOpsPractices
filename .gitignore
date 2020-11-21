@@ -6,6 +6,7 @@
 ## Build generated
 build/
 vendor/
+.bundle
 DerivedData/
 Gemfile.lock
 Podfile.lock
