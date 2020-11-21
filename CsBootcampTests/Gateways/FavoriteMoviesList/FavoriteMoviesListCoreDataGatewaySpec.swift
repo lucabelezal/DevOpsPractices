@@ -106,11 +106,16 @@ final class FavoriteMoviesListCoreDataGatewaySpec: QuickSpec {
                 }
                 
                 context("and toggleMovieFavorite is called") {
-                    
+                    var result: Result<Bool>!
+
                     beforeEach {
-                        favoriteMoviesListCoreDataGateway.toggleMovieFavorite(movie)
+                        result = favoriteMoviesListCoreDataGateway.toggleMovieFavorite(movie)
                     }
-                    
+
+                    it("should return true") {
+                        expect(result.value).to(beTrue())
+                    }
+
                     context("and isMovieFavorite is called") {
                         
                         var result: Result<Bool>!
@@ -135,9 +140,14 @@ final class FavoriteMoviesListCoreDataGatewaySpec: QuickSpec {
                     }
                     
                     context("and toggleMovieFavorite is called") {
-                        
+                        var result: Result<Bool>!
+
                         beforeEach {
-                            favoriteMoviesListCoreDataGateway.toggleMovieFavorite(movie)
+                            result = favoriteMoviesListCoreDataGateway.toggleMovieFavorite(movie)
+                        }
+
+                        it("should return false") {
+                            expect(result.value).to(beFalse())
                         }
                         
                         context("and isMovieFavorite is called") {
