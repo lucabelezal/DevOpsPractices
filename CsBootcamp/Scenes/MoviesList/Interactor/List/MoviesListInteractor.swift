@@ -26,7 +26,7 @@ final class MoviesListInteractor: MoviesListInteractorType, MovieListFavoriteInt
             guard let `self` = self else { return }
 
             switch result {
-            case .success(let movies):
+            case let .success(movies):
 
                 self.movies.append(contentsOf: movies)
                 self.presentResponses(with: self.movies)

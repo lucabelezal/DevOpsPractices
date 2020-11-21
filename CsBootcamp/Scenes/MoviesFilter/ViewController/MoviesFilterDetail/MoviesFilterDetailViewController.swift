@@ -9,6 +9,7 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
             }
         }
     }
+
     var didSelectOptionAtIndex: ((Int) -> Void)?
     let options: [String]
 
@@ -35,14 +36,14 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
         super.viewDidLoad()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_: Bool) {
         if let indexPath = tableView.indexPathForSelectedRow {
             didSelectOptionAtIndex?(indexPath.row)
         }
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
@@ -60,11 +61,11 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
 
     // MARK: - Table view data source
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return options.count
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let index = selectedOptionIndex,
             index == indexPath.row {
             cell.accessoryType = .checkmark

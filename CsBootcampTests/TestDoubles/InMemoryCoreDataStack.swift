@@ -1,6 +1,7 @@
 @testable
-import CoreData
 import CsBootcamp
+
+import CoreData
 
 final class InMemoryCoreDataStack: CoreDataStack {
     let container: NSPersistentContainer

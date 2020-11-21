@@ -12,11 +12,11 @@ enum Result<T> {
 
     func map<U>(_ transform: (T) throws -> (U)) rethrows -> Result<U> {
         switch self {
-        case .success(let value):
+        case let .success(value):
             let transformedValue = try transform(value)
             return Result<U>.success(transformedValue)
 
-        case .failure(let error):
+        case let .failure(error):
             return Result<U>.failure(error)
         }
     }

@@ -32,7 +32,7 @@ public final class MoviePosterTableViewCell: UITableViewCell {
         return button
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupViewHierarchy()
@@ -40,12 +40,12 @@ public final class MoviePosterTableViewCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
     func setup(viewModel: ViewModel) {
-        self.titleLabel.text = viewModel.title
+        titleLabel.text = viewModel.title
         imageFetcher.fetchImage(from: viewModel.imageURL, to: posterImageView) {}
         favoriteButton.setImage(viewModel.isFavoriteImage, for: .normal)
     }
@@ -75,7 +75,7 @@ public final class MoviePosterTableViewCell: UITableViewCell {
             .trailingAnchor(equalTo: contentView.trailingAnchor, constant: -16)
     }
 
-    @objc private func favoriteButtonAction(_ sender: AnyObject) {
+    @objc private func favoriteButtonAction(_: AnyObject) {
         favoriteButtonTapped?()
     }
 }

@@ -26,11 +26,11 @@ final class MoviesFilterDataSource: NSObject, UITableViewDelegate, UITableViewDa
 
     // MARK: UITableViewDataSource conforms
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return filterOptionTypes.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: cellReuseIdentifier)
         cell.selectionStyle = .none
         cell.detailTextLabel?.textColor = UIColor.Bootcamp.yellow
@@ -42,7 +42,7 @@ final class MoviesFilterDataSource: NSObject, UITableViewDelegate, UITableViewDa
         return cell
     }
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_: UITableView, viewForFooterInSection _: Int) -> UIView? {
         let footerView = UIView()
         footerView.backgroundColor = .white
         return footerView
@@ -50,7 +50,7 @@ final class MoviesFilterDataSource: NSObject, UITableViewDelegate, UITableViewDa
 
     // MARK: UITableViewDelegate conforms
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         didSelectItem?(indexPath.item)
     }
 }

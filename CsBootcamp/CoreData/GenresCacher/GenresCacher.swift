@@ -15,9 +15,9 @@ final class GenresCacher {
         if getNeedsCache() {
             genresListGateway.fetchGenres { [weak self] result in
                 if let genres = result.value {
-                    self?.genresCacheGateway.addGenres(genres, { _ in
+                    self?.genresCacheGateway.addGenres(genres) { _ in
                         self?.setNeedsCache(false)
-                    })
+                    }
                 }
             }
         }

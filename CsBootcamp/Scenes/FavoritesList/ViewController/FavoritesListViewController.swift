@@ -36,7 +36,7 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
         return searchBar
     }()
 
-    lazy weak var searchBarDelegate: SearchBarDelegate = {
+    lazy var searchBarDelegate: SearchBarDelegate = {
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate
     }()
@@ -56,7 +56,7 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
@@ -90,7 +90,7 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
     }
 
     @objc
-    func rightBarButtonAction(sender: UIBarButtonItem) {
+    func rightBarButtonAction(sender _: UIBarButtonItem) {
         let moviesFilterViewController = MoviesFilterSceneFactory.make(movieFilter: movieFilter)
         show(moviesFilterViewController, sender: nil)
     }
@@ -100,7 +100,7 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
     }
 
     @objc
-    private func removeFilterAction(sender: UIButton) {
+    private func removeFilterAction(sender _: UIButton) {
         movieFilter.clearFilter()
         movieFilter.commit()
         updateRemoveFilterButtonLayout()

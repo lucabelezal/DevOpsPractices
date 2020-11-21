@@ -46,13 +46,13 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
     func setup(viewModel: ViewModel) {
         titleLabel.text = viewModel.title
-        imageFetcher.fetchImage(from: viewModel.imageURL, to: imageView) { }
+        imageFetcher.fetchImage(from: viewModel.imageURL, to: imageView) {}
         favoriteButton.setImage(viewModel.favoriteButtonImage, for: .normal)
     }
 

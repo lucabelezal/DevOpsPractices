@@ -7,7 +7,7 @@ protocol MoviesFilterPresenterType: AnyObject {
 }
 
 final class MoviesFilterInteractor: MoviesFilterInteractorType {
-    private let filterOptionTypes =  ["Date", "Genres"]
+    private let filterOptionTypes = ["Date", "Genres"]
     let presenter: MoviesFilterPresenterType
     let gateway: GenresCacheGateway
 
@@ -58,7 +58,7 @@ final class MoviesFilterInteractor: MoviesFilterInteractorType {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: currenteDate)
 
-        releaseYears = (0..<100).map { index in
+        releaseYears = (0 ..< 100).map { index in
             year - index
         }
 

@@ -30,7 +30,7 @@ enum MovieTarget: TargetType {
 
     var parameters: [String: Any] {
         switch self {
-        case .popular(let page): return ["api_key": APISettings.key, "page": page]
+        case let .popular(page): return ["api_key": APISettings.key, "page": page]
         }
     }
 

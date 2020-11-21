@@ -9,7 +9,7 @@ class MovieDetailSceneFactorySpec: QuickSpec {
         describe("MovieDetailSceneFactory") {
             var viewController: MovieDetailViewController!
 
-            context("when make method is called", {
+            context("when make method is called") {
                 let movie = Movie(id: 0, genreIds: [], title: "", overview: "", releaseDate: Date(), posterPath: "")
 
                 beforeEach {
@@ -19,7 +19,7 @@ class MovieDetailSceneFactorySpec: QuickSpec {
                 it("should return a instance of UIViewController", closure: {
                     expect(viewController).toNot(beNil())
                 })
-            })
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ class FavoritesListInteractorSpec: QuickSpec {
 final class FavoritesListPresenterSpy: FavoritesListPresenterType {
     var isPresentFavoriteCalled = false
 
-    func presentFavorites(_ movies: [Movie]) {
+    func presentFavorites(_: [Movie]) {
         isPresentFavoriteCalled = true
     }
 }

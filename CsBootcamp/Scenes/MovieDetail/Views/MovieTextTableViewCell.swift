@@ -12,7 +12,7 @@ public final class MovieTextTableViewCell: UITableViewCell {
         return label
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupViewHierarchy()
@@ -20,12 +20,12 @@ public final class MovieTextTableViewCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
     func setup(viewModel: ViewModel) {
-        self.textLabelCell.text = viewModel.description
+        textLabelCell.text = viewModel.description
     }
 
     private func setupViewHierarchy() {

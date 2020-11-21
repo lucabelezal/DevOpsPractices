@@ -48,7 +48,7 @@ class MoviesFilterViewController: UIViewController, FilterView {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
@@ -60,7 +60,7 @@ class MoviesFilterViewController: UIViewController, FilterView {
         setupViewHierarchy()
         setupConstraints()
 
-        dataSource.didSelectItem = self.filterSelected
+        dataSource.didSelectItem = filterSelected
         moviesFilterInteractor?.fetchDetailOptionTypes(movieFilter: movieFilter)
     }
 
@@ -102,22 +102,22 @@ class MoviesFilterViewController: UIViewController, FilterView {
         show(vc, sender: nil)
     }
 
-    @objc private func applyFilterAction(sender: UIButton) {
+    @objc private func applyFilterAction(sender _: UIButton) {
         movieFilter.commit()
         navigationController?.popViewController(animated: true)
     }
 
     private func setUpdateFilter(withIndex index: Int) {
         updateFilter = { options in { optionIndex in
-                let option = options[optionIndex]
-                self.dataSource.filterOptions[index] = option
+            let option = options[optionIndex]
+            self.dataSource.filterOptions[index] = option
 
-                if index == 0 {
-                    self.setReleaseYearFilter(at: optionIndex)
-                } else if index == 1 {
-                    self.setGenreFilter(at: optionIndex)
-                }
+            if index == 0 {
+                self.setReleaseYearFilter(at: optionIndex)
+            } else if index == 1 {
+                self.setGenreFilter(at: optionIndex)
             }
+        }
         }
     }
 

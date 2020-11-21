@@ -48,7 +48,7 @@ class MoviesListViewControllerSpec: QuickSpec {
                 }
 
                 context("and display movies is called") {
-                    let viewModel = MoviesListViewModel(cellViewModels: (0..<3).map { _ in
+                    let viewModel = MoviesListViewModel(cellViewModels: (0 ..< 3).map { _ in
                         MovieCollectionViewCell.ViewModel(
                             imageURL: URL(string: "url.com")!,
                             title: "",
@@ -154,14 +154,13 @@ class MoviesListViewControllerSpec: QuickSpec {
 class MoviesListInteractorSpy: MoviesListInteractorType {
     var fetchMoviesCalled = false
 
-    func fetchMovies(from page: Int) {
+    func fetchMovies(from _: Int) {
         fetchMoviesCalled = true
     }
 
-    func movie(at index: Int) -> Movie {
+    func movie(at _: Int) -> Movie {
         return Movie(id: 1, genreIds: [], title: "", overview: "", releaseDate: Date(), posterPath: "www.com")
     }
 
-    func reloadMovies() {
-    }
+    func reloadMovies() {}
 }

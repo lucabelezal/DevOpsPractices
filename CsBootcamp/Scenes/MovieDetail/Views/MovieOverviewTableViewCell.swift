@@ -13,7 +13,7 @@ final class MovieOverviewTableViewCell: UITableViewCell {
         return label
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupViewHierarchy()
@@ -21,12 +21,12 @@ final class MovieOverviewTableViewCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
     func setup(viewModel: ViewModel) {
-        self.overviewLabel.text = viewModel.overview
+        overviewLabel.text = viewModel.overview
     }
 
     private func setupViewHierarchy() {

@@ -15,7 +15,7 @@ final class FavoriteMoviesListCoreDataGateway: FavoriteMoviesListGateway {
     func toggleMovieFavorite(_ movie: Movie) -> Result<Bool> {
         let checkResult = isMovieFavorite(movie)
 
-        guard case .success(let isFavorite) = checkResult else {
+        guard case let .success(isFavorite) = checkResult else {
             return checkResult
         }
 
@@ -24,7 +24,7 @@ final class FavoriteMoviesListCoreDataGateway: FavoriteMoviesListGateway {
         switch result {
         case .success:
             return .success(!isFavorite)
-        case .failure(let error):
+        case let .failure(error):
             return .failure(error)
         }
     }
@@ -38,7 +38,7 @@ final class FavoriteMoviesListCoreDataGateway: FavoriteMoviesListGateway {
         switch result {
         case .success:
             return .success(())
-        case .failure(let error):
+        case let .failure(error):
             return .failure(error)
         }
     }

@@ -15,10 +15,10 @@ final class MoviesFilterPresenter: MoviesFilterPresenterType {
     func presentFilterOptions(types: [String], releaseYearOption: Int?, genreOption: Genre?) {
         var options: [Int: String] = [:]
         releaseYearOption
-            .map(self.releaseYearDescription)
+            .map(releaseYearDescription)
             .map { options[0] = $0 }
         genreOption
-            .map(self.genreDescription)
+            .map(genreDescription)
             .map { options[1] = $0 }
 
         view?.displayFilterOptions(types: types, options: options)

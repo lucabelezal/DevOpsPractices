@@ -18,6 +18,7 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
             }
         }
     }
+
     var didPressedItemButton: ((Int) -> Void)?
 
     var viewModels: [MovieCollectionViewCell.ViewModel] = [] {
@@ -30,9 +31,9 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
         let enumeratedViewModels = self.viewModels.enumerated().map { $0 }
         let viewModels = searchPredicate.isEmpty ?
             enumeratedViewModels :
-            enumeratedViewModels.filter({ args in
+            enumeratedViewModels.filter { args in
                 args.element.title.lowercased().contains(self.searchPredicate.lowercased())
-            })
+            }
 
         searchDidReturnCount?(searchPredicate, viewModels.count)
 
@@ -55,7 +56,7 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
     }
 
     private func favoriteButtonTapped(sender: AnyObject) {
-        let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
+        let buttonPosition = sender.convert(CGPoint.zero, to: collectionView)
         let indexPath = collectionView?.indexPathForItem(at: buttonPosition)
 
         if let indexPath = indexPath {
@@ -65,7 +66,7 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
 
     // MARK: UICollectionViewDataSource conforms
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return filteredViewModels.count
     }
 
@@ -82,11 +83,11 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
 
     // MARK: UICollectionViewDelegateFlowLayout conforms
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return MovieCollectionViewCell.cellSize
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = filteredViewModels[indexPath.item].0
         didSelectItem?(index)
     }
@@ -104,11 +105,11 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
             }
             return footer
         default:
-             return UICollectionReusableView()
+            return UICollectionReusableView()
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, referenceSizeForFooterInSection _: Int) -> CGSize {
         return CGSize(width: collectionView.bounds.size.width, height: 55)
     }
 

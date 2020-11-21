@@ -1,9 +1,9 @@
 final class MovieFilterTransaction {
     private var commitSnapshot: (
-    genreFilter: Genre?,
-    releaseYearFilter: Int?,
-    genreFilterIndex: Int?,
-    releaseYearFilterIndex: Int?
+        genreFilter: Genre?,
+        releaseYearFilter: Int?,
+        genreFilterIndex: Int?,
+        releaseYearFilterIndex: Int?
     )
 
     var genreFilter: Genre?

@@ -41,7 +41,7 @@ final class FavoriteTableViewCell: UITableViewCell {
         return label
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
 
         setupViewHierarchy()
@@ -52,15 +52,15 @@ final class FavoriteTableViewCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     func setup(viewModel: ViewModel) {
         imagerFetcher.fetchImage(from: viewModel.posterUrl, to: posterImageView) {}
-        self.titleLabel.text = viewModel.title
-        self.releaseDateLabel.text = viewModel.releaseDate
-        self.overviewLabel.text = viewModel.overview
+        titleLabel.text = viewModel.title
+        releaseDateLabel.text = viewModel.releaseDate
+        overviewLabel.text = viewModel.overview
     }
 
     private func setupViewHierarchy() {
@@ -81,7 +81,7 @@ final class FavoriteTableViewCell: UITableViewCell {
             .topAnchor(equalTo: contentView.topAnchor, constant: CGFloat(16).proportionalToWidth)
             .leadingAnchor(equalTo: posterImageView.trailingAnchor, constant: CGFloat(8).proportionalToWidth)
 
-    titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         overviewLabel
             .topAnchor(equalTo: titleLabel.bottomAnchor, constant: CGFloat(8).proportionalToWidth)

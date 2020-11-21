@@ -73,7 +73,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
         return dataSource
     }()
 
-    lazy weak var searchBarDelegate: SearchBarDelegate = {
+    lazy var searchBarDelegate: SearchBarDelegate = {
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate
     }()
@@ -83,7 +83,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
     var favoriteInteractor: MovieListFavoriteInteractorType?
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         return nil
     }
 
@@ -130,13 +130,13 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
         let movie = listInteractor?.movie(at: index)
 
         if let movie = movie {
-           favoriteInteractor?.toggleMovieFavorite(movie)
+            favoriteInteractor?.toggleMovieFavorite(movie)
         }
     }
 
     private func movieSelected(at index: Int) {
         if let movie = listInteractor?.movie(at: index) {
-            self.showDetailInteractor?.showDetail(forMovie: movie)
+            showDetailInteractor?.showDetail(forMovie: movie)
         }
     }
 

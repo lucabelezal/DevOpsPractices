@@ -14,7 +14,7 @@ class SearchBarDelegate: NSObject, UISearchBarDelegate {
         return true
     }
 
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_: UISearchBar) {
         searchBarIsActive = true
     }
 
@@ -36,7 +36,7 @@ class SearchBarDelegate: NSObject, UISearchBarDelegate {
         textDidChange?("")
     }
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_: UISearchBar, textDidChange searchText: String) {
         textDidChange?(searchText)
     }
 }

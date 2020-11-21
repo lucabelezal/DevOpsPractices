@@ -18,7 +18,7 @@ final class GenresCacheCoreDataGatewaySpec: QuickSpec {
                 }
 
                 context("and add genres is called") {
-                    let addedGenres = (0..<3).map { i in
+                    let addedGenres = (0 ..< 3).map { i in
                         Genre(id: i, name: "name\(i)")
                     }
 

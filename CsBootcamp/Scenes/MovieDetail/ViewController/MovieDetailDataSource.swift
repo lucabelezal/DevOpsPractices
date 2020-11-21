@@ -5,7 +5,7 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
 
     var viewModel: MovieDetailViewController.ViewModel? {
         didSet {
-             tableView.reloadData()
+            tableView.reloadData()
         }
     }
 
@@ -20,13 +20,13 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
         tableView.reloadData()
     }
 
-    private func registerCells(in tavleView: UITableView) {
+    private func registerCells(in _: UITableView) {
         tableView.register(MoviePosterTableViewCell.self)
         tableView.register(MovieTextTableViewCell.self)
         tableView.register(MovieOverviewTableViewCell.self)
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return 4
     }
 
@@ -64,7 +64,7 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
         return cell ?? UITableViewCell()
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
             return MoviePosterTableViewCell.cellHeight
@@ -79,7 +79,7 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource, UITableViewD
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
     }
 }

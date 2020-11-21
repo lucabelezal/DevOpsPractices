@@ -8,7 +8,7 @@ final class ActivityIndicatorFooterView: UICollectionReusableView {
     }
 
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -18,12 +18,12 @@ final class ActivityIndicatorFooterView: UICollectionReusableView {
     }
 
     private func setupViewHierarchy(activityIndicator: UIActivityIndicatorView) {
-        self.addSubview(activityIndicator)
+        addSubview(activityIndicator)
     }
 
     private func setupConstraints(activityIndicator: UIActivityIndicatorView) {
         activityIndicator
-            .centerXAnchor(equalTo: self.centerXAnchor)
-            .centerYAnchor(equalTo: self.centerYAnchor)
+            .centerXAnchor(equalTo: centerXAnchor)
+            .centerYAnchor(equalTo: centerYAnchor)
     }
 }

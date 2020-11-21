@@ -10,13 +10,13 @@ final class MovieDetailInteractor: MovieDetailInteractorType, MovieDetailFavorit
 
     init(presenter: MovieDetailPresenterType, genresGateway: GenresCacheGateway, favoriteMoviesListGateway: FavoriteMoviesListGateway) {
         self.presenter = presenter
-        self.genresCacheGateway = genresGateway
+        genresCacheGateway = genresGateway
         self.favoriteMoviesListGateway = favoriteMoviesListGateway
     }
 
     private func createResponse(fromMovie movie: Movie, genres: [Genre]) -> FetchMovieDetailResponse {
         let genreNames = genres.map { genre in genre.name }
-        let isFavoriteResult = self.favoriteMoviesListGateway.isMovieFavorite(movie)
+        let isFavoriteResult = favoriteMoviesListGateway.isMovieFavorite(movie)
         let isFavorite = isFavoriteResult.value ?? false
 
         return FetchMovieDetailResponse(

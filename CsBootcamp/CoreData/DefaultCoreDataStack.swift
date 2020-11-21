@@ -2,7 +2,7 @@ import CoreData
 
 final class DefaultCoreDataStack: CoreDataStack {
     static var shared: DefaultCoreDataStack = {
-        return DefaultCoreDataStack()
+        DefaultCoreDataStack()
     }()
 
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -21,7 +21,7 @@ final class DefaultCoreDataStack: CoreDataStack {
         return context
     }()
 
-    private init() { }
+    private init() {}
 
     func saveContext() {
         if context.hasChanges {

@@ -24,10 +24,10 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
 
         let viewModels = searchPredicate.isEmpty ?
             enumeratedViewModels :
-            enumeratedViewModels.filter({ args -> Bool in
+            enumeratedViewModels.filter { args -> Bool in
                 args.element.title.lowercased()
                     .contains(self.searchPredicate.lowercased())
-            })
+            }
         searchDidReturnCount?(searchPredicate, viewModels.count)
 
         return viewModels
@@ -47,7 +47,7 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
         tableView.register(FavoriteTableViewCell.self)
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return filteredViewModels.count
     }
 
@@ -58,12 +58,12 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
         return cell
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_: UITableView, canEditRowAt _: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .destructive, title: "Unfavorite") {  _, _, _ in
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .destructive, title: "Unfavorite") { _, _, _ in
             self.didUnfavoriteItemAtIndex?(self.filteredViewModels[indexPath.row].0)
         }
         let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
@@ -72,11 +72,11 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
 
     // MARK: - UITableView Delegate
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return FavoriteTableViewCell.cellHeight
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
     }
 }

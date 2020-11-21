@@ -24,7 +24,7 @@ class MoviesListInteractorSpec: QuickSpec {
 
                 context("and fetch movies is called") {
                     context("and it succeeds") {
-                        let movies = (0..<3).map { id in
+                        let movies = (0 ..< 3).map { id in
                             Movie(id: id, genreIds: [], title: "", overview: "", releaseDate: Date(), posterPath: "")
                         }
 
@@ -78,7 +78,7 @@ final class MoviesListPresenterSpy: MoviesListPresenterType {
 final class MoviesListGatewayStub: MoviesListGateway {
     var result: Result<[Movie]>!
 
-    func fetchMovies(page: Int, _ completion: @escaping (Result<[Movie]>) -> Void) {
+    func fetchMovies(page _: Int, _ completion: @escaping (Result<[Movie]>) -> Void) {
         completion(result)
     }
 }

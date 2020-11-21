@@ -38,11 +38,11 @@ class MovieDetailInteractorSpec: QuickSpec {
 }
 
 class FavoriteMoviesListGatewayFake: FavoriteMoviesListGateway {
-    func toggleMovieFavorite(_ movie: Movie) -> Result<Bool> {
+    func toggleMovieFavorite(_: Movie) -> Result<Bool> {
         return .success(true)
     }
 
-    func setMovie(_ movie: Movie, favorite: Bool) -> Result<Void> {
+    func setMovie(_: Movie, favorite _: Bool) -> Result<Void> {
         return .success(())
     }
 
@@ -50,7 +50,7 @@ class FavoriteMoviesListGatewayFake: FavoriteMoviesListGateway {
         return .success([])
     }
 
-    func isMovieFavorite(_ movie: Movie) -> Result<Bool> {
+    func isMovieFavorite(_: Movie) -> Result<Bool> {
         return .success(true)
     }
 }
@@ -58,13 +58,11 @@ class FavoriteMoviesListGatewayFake: FavoriteMoviesListGateway {
 class GenresCacheGatewayStub: GenresCacheGateway {
     var stubbedResult: Result<[Genre]>!
 
-    func fetchGenres(_ completion: @escaping (Result<[Genre]>) -> Void) {
-    }
+    func fetchGenres(_: @escaping (Result<[Genre]>) -> Void) {}
 
-    func addGenres(_ genres: [Genre], _ completion: @escaping (Result<Void>) -> Void) {
-    }
+    func addGenres(_: [Genre], _: @escaping (Result<Void>) -> Void) {}
 
-    func fetchGenres(withIds ids: [Int], _ completion: @escaping (Result<[Genre]>) -> Void) {
+    func fetchGenres(withIds _: [Int], _ completion: @escaping (Result<[Genre]>) -> Void) {
         completion(stubbedResult)
     }
 }
@@ -72,7 +70,7 @@ class GenresCacheGatewayStub: GenresCacheGateway {
 class MovieDetailPresenterSpy: MovieDetailPresenterType {
     var isPresentMovieCalled = false
 
-    func presentMovie(response: FetchMovieDetailResponse) {
+    func presentMovie(response _: FetchMovieDetailResponse) {
         isPresentMovieCalled = true
     }
 }

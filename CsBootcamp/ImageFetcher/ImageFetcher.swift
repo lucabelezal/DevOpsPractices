@@ -5,7 +5,7 @@ protocol ImageFetcher {
 }
 
 final class ImageFetcherStub: ImageFetcher {
-    func fetchImage(from url: URL, to imageView: UIImageView, callback: @escaping () -> Void) {
+    func fetchImage(from _: URL, to imageView: UIImageView, callback: @escaping () -> Void) {
         imageView.image = #imageLiteral(resourceName: "poster_stub")
         callback()
     }

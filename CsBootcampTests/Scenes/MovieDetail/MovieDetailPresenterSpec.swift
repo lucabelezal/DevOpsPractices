@@ -35,7 +35,7 @@ class MovieDetailPresenterSpec: QuickSpec {
 class MovieDetailViewControllerSpy: MovieDetailView {
     var isDisplayMovieDetailCalled = false
 
-    func displayMovieDetail(viewModel: MovieDetailViewController.ViewModel) {
+    func displayMovieDetail(viewModel _: MovieDetailViewController.ViewModel) {
         isDisplayMovieDetailCalled = true
     }
 }

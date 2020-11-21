@@ -5,8 +5,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private var genresCacher: GenresCacher?
 
     func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         print(docsPath)

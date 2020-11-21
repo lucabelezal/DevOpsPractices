@@ -67,7 +67,7 @@ class MovieDetailViewControllerSpec: QuickSpec {
 class MovieDetailInteractorSpy: MovieDetailInteractorType {
     var isFetchDetailOfMovieCalled = false
 
-    func fetchDetail(of movie: Movie) {
+    func fetchDetail(of _: Movie) {
         isFetchDetailOfMovieCalled = true
     }
 }

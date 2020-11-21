@@ -17,7 +17,7 @@ class MoviesListPresenterSpec: QuickSpec {
                 }
 
                 context("and present movies is called") {
-                    let movies = (0..<3).map { _ in
+                    let movies = (0 ..< 3).map { _ in
                         FetchMoviesListResponse(
                             posterPath: "", title: "", isFavorite: true
                         )
