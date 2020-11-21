@@ -1,6 +1,6 @@
 import UIKit
 
-final class MovieTextTableViewCell: UITableViewCell {
+public final class MovieTextTableViewCell: UITableViewCell {
     
     static var cellHeight: CGFloat = CGFloat(44).proportionalToWidth
     

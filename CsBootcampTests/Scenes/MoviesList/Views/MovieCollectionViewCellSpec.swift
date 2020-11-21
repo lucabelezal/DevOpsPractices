@@ -11,32 +11,20 @@ class MovieCollectionViewCellSpec: QuickSpec {
         
         describe("MovieCollectionViewCell") {
             
-            var cell: MovieCollectionViewCell!
-            
-            context("when initialized with coder") {
-                
-                beforeEach {
-                    let coder = NSCoder()
-                    cell = MovieCollectionViewCell(coder: coder)
-                }
-                
-                it("should be nil") {
-                    expect(cell).to(beNil())
-                }
-            }
-            
+            var sut: MovieCollectionViewCell!
+                        
             context("when initialized") {
                 
                 beforeEach {
-                    cell = MovieCollectionViewCell(frame: .zero)
+                    sut = MovieCollectionViewCell(frame: .zero)
                 }
                 
                 it("should setup the view hierarchy") {
-                    expect(cell.contentView.subviews).to(contain([cell.titleLabel, cell.imageView]))
+                    expect(sut.contentView.subviews).to(contain([sut.titleLabel, sut.imageView]))
                 }
                 
                 it("should set the content view background color") {
-                    expect(cell.contentView.backgroundColor).to(equal(UIColor.Bootcamp.darkBlue))
+                    expect(sut.contentView.backgroundColor).to(equal(UIColor.Bootcamp.darkBlue))
                 }
                 
                 context("and setup") {
@@ -48,15 +36,11 @@ class MovieCollectionViewCellSpec: QuickSpec {
                     )
                     
                     beforeEach {
-                        cell.setup(viewModel: viewModel)
+                        sut.setup(viewModel: viewModel)
                     }
                     
                     it("should set label text") {
-                        expect(cell.titleLabel.text).to(equal(viewModel.title))
-                    }
-                    
-                    it("should config imageview fetch") {
-                        expect(cell.imageView.kf.webURL).to(be(viewModel.imageURL))
+                        expect(sut.titleLabel.text).to(equal(viewModel.title))
                     }
                 }
             }

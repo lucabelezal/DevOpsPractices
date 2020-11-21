@@ -17,15 +17,17 @@ class GenresListMoyaGatewaySpec: QuickSpec {
                 
                 let target = GenreTarget.list
                 let host = target.baseURL.host!
-                
-                stub(condition: isHost(host)) { (request) -> OHHTTPStubsResponse in
-                    let path = Bundle(for: GenresListMoyaGatewaySpec.self).path(forResource: "genres_list", ofType: "json")!
+
+                stub(condition: isHost(host)) { (request) -> HTTPStubsResponse in
+                    let path = Bundle(
+                        for: GenresListMoyaGatewaySpec.self
+                    ).path(forResource: "genres_list", ofType: "json")!
                     return fixture(filePath: path, headers: nil)
                 }
             }
             
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             context("when fetch movie genres") {

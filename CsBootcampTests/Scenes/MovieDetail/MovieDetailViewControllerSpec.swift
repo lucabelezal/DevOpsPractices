@@ -67,18 +67,6 @@ class MovieDetailViewControllerSpec: QuickSpec {
                     }
                 }
             }
-            
-            context("when it is initialized with coder") {
-                
-                beforeEach {
-                    let coder = NSCoder()
-                    sut = MovieDetailViewController(coder: coder)
-                }
-                
-                it("should be nil") {
-                    expect(sut).to(beNil())
-                }
-            }
         }
     }
 }

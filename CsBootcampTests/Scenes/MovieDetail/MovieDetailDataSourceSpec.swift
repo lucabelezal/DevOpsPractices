@@ -140,7 +140,7 @@ class MovieDetailDataSourceSpec: QuickSpec {
                         it("should return the correct height cell for a overview cell", closure: {
                             indexPath = IndexPath(row: 3, section: 0)
                             let height = sut.tableView(tableView, heightForRowAt: indexPath)
-                            expect(height).to(equal(UITableViewAutomaticDimension))
+                            expect(height).to(equal(UITableView.automaticDimension))
                         })
                     })
                 }

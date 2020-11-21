@@ -38,18 +38,6 @@ class MovieTextTableViewCellSpec: QuickSpec {
                     })
                 })
             })
-            
-            context("When is initialized with coder", {
-                
-                beforeEach {
-                    let coder = NSCoder()
-                    sut = MovieTextTableViewCell(coder: coder)
-                }
-                
-                it("should be nil", closure: {
-                    expect(sut).to(beNil())
-                })
-            })
         }
     }
 }

@@ -3,31 +3,25 @@ import UIKit
 final class MovieListErrorView: UIView {
 
     lazy var label: UILabel = {
-        
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
     lazy var imageView: UIImageView = {
-       
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     
     let iconDiameterRatio: CGFloat
     
-    init(frame: CGRect, iconDiameterRatio: CGFloat) {
-        
+    init(frame: CGRect = .zero, iconDiameterRatio: CGFloat) {
         self.iconDiameterRatio = iconDiameterRatio
-        
         super.init(frame: frame)
         setupViewHierarchy()
         setupConstraints()

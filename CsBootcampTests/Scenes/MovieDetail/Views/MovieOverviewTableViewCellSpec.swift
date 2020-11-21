@@ -13,7 +13,6 @@ class MovieOverviewTableViewCellSpec: QuickSpec {
         describe("MovieOverviewTableViewCell", closure:{
             
             var sut: MovieOverviewTableViewCell!
-            var cell: MovieOverviewTableViewCell!
             
             context("when it's initialized", closure: {
                 
@@ -38,20 +37,6 @@ class MovieOverviewTableViewCellSpec: QuickSpec {
                     })
                 })
             })
-            
-            context("When is initialized with coder", {
-                
-                beforeEach {
-                    let coder = NSCoder()
-                    cell = MovieOverviewTableViewCell(coder: coder)
-                }
-                
-                it("should be nil", closure: {
-                    expect(cell).to(beNil())
-                })
-            })
         })
-        
     }
-    
 }

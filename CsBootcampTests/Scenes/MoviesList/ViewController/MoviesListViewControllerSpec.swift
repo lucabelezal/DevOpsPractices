@@ -104,19 +104,7 @@ class MoviesListViewControllerSpec: QuickSpec {
                     }
                 }
             }
-            
-            context("when initialized with coder") {
-                
-                beforeEach {
-                    let coder = NSCoder()
-                    viewController = MoviesListViewController(coder: coder)
-                }
-                
-                it("should be nil") {
-                    expect(viewController).to(beNil())
-                }
-            }
-            
+                        
             describe("State") {
                 
                 var state: MoviesListViewController.State!

@@ -41,17 +41,6 @@ class MovieListErrorViewSpec: QuickSpec {
                     }
                 }
             }
-            
-            context("when initialized with coder") {
-                
-                beforeEach {
-                    errorView = MovieListErrorView(coder: NSCoder())
-                }
-                
-                it("should be nil") {
-                    expect(errorView).to(beNil())
-                }
-            }
         }
     }
 }

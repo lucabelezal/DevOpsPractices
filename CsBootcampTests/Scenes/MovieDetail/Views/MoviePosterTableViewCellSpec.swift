@@ -41,18 +41,6 @@ class MoviePosterTableViewCellSpec: QuickSpec {
                     }
                 }
             }
-            
-            context("When is initialized with coder") {
-                
-                beforeEach {
-                    let coder = NSCoder()
-                    sut = MoviePosterTableViewCell(coder: coder)
-                }
-                
-                it("should be nil") {
-                    expect(sut).to(beNil())
-                }
-            }
         }
     }
 }

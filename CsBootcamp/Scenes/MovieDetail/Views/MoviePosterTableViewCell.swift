@@ -1,6 +1,6 @@
 import UIKit
 
-class MoviePosterTableViewCell: UITableViewCell {
+public final class MoviePosterTableViewCell: UITableViewCell {
     
     private let imageFetcher: ImageFetcher = KingfisherImageFetcher()
     
@@ -82,9 +82,7 @@ class MoviePosterTableViewCell: UITableViewCell {
 }
 
 extension MoviePosterTableViewCell {
-    
-    struct ViewModel {
-        
+    public struct ViewModel {
         let imageURL: URL
         let title: String
         let isFavoriteImage: UIImage

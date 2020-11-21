@@ -20,7 +20,7 @@ class MoviesListMoyaGatewaySpec: QuickSpec {
                 let target = MovieTarget.popular(page)
                 let host = target.baseURL.host!
 
-                stub(condition: isHost(host)) { (request) -> OHHTTPStubsResponse in
+                stub(condition: isHost(host)) { (request) -> HTTPStubsResponse in
 
                     let path = Bundle(for: MoviesListMoyaGatewaySpec.self).path(forResource: "movies_list", ofType: "json")!
                     return fixture(filePath: path, headers: nil)
@@ -28,7 +28,7 @@ class MoviesListMoyaGatewaySpec: QuickSpec {
             }
 
             afterEach {
-                OHHTTPStubs.removeAllStubs()
+                HTTPStubs.removeAllStubs()
             }
 
             context("when fetch movies") {
