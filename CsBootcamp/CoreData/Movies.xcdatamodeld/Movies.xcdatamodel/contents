@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GenreCoreData" representedClassName=".GenreCoreData" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MovieCoreData" inverseName="genres" inverseEntity="MovieCoreData" syncable="YES"/>
+    </entity>
+    <entity name="MovieCoreData" representedClassName=".MovieCoreData" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="overview" attributeType="String" syncable="YES"/>
+        <attribute name="posterPath" attributeType="String" syncable="YES"/>
+        <attribute name="releaseDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GenreCoreData" inverseName="movies" inverseEntity="GenreCoreData" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GenreCoreData" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="MovieCoreData" positionX="-234" positionY="0" width="128" height="135"/>
+    </elements>
+</model>
