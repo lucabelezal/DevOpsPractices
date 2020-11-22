@@ -37,4 +37,31 @@ platform :ios do
     swiftlint(executable: 'Pods/SwiftLint/swiftlint', strict: true)
   end
 
+  desc "Coverage"
+  lane :coverage do
+    slather(
+      sonarqube_xml: true,
+      build_directory: "build/Build/",
+      input_format: "profdata",
+      output_directory: "Coverage/",
+      scheme: "CsBootcamp",
+      proj: "CsBootcamp.xcodeproj",
+      workspace: "CsBootcamp.xcodeproj",
+      ignore: ["CsBootcampTests/*"]
+    )
+  end
+
+  desc "Code Quality and Security"
+  lane :sonarqube do
+    sonar(
+      project_key: "lucabelezal_DevOpsPractices",
+      sonar_organization: "skeleton",
+      project_name: "CsBootcamp",
+      sources_path: File.expand_path("../CsBootcamp"),
+      sonar_url: "https://sonarcloud.io"
+    )
+  end
+  
 end
+
+
