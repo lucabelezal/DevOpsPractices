@@ -50,7 +50,7 @@ jobs:
         run: |
           chmod +x scripts/run_swiftlint.sh
           chmod +x scripts/xcov-to-sonarqube-generic.sh
-          scripts/xcov-to-sonarqube-generic.sh build/Logs/Test/Run-covidwatch-ios-* > coverage.xml
+          scripts/xcov-to-sonarqube-generic.sh build/Logs/Test/Run-CsBootcamp > coverage.xml
       - name: Install SonarCloud
         run: |
           export SONAR_SCANNER_VERSION=4.2.0.1873
@@ -65,8 +65,8 @@ jobs:
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
           export SONAR_SCANNER_OPTS="-server"
           sonar-scanner \
-          -Dsonar.organization=covid19risk \
-          -Dsonar.projectKey=covid19risk_covidwatch-ios \
+          -Dsonar.organization=skeleton \
+          -Dsonar.projectKey=lucabelezal_DevOpsPractices \
           -Dsonar.sources="CsBootcamp" \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=$SONARCLOUD_LOGIN_KEY \
