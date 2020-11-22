@@ -22,7 +22,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.3
-          bundler-cache: true
       - name: Install Dependencies
         run: |
           bundle install
@@ -30,7 +29,6 @@ jobs:
       - name: Xcode Build
         run: |
           set -o pipefail xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
-
   test:
     name: Run Tests
     needs: build
@@ -50,8 +48,6 @@ jobs:
           bundle exec fastlane tests
       - name: Convert Logs
         run: |
-          chmod +x scripts/run_swiftlint.sh
-          chmod +x scripts/xcov-to-sonarqube-generic.sh
           scripts/xcov-to-sonarqube-generic.sh build/Logs/Test/Run-covidwatch-ios-* > coverage.xml
       - name: Install SonarCloud
         run: |
