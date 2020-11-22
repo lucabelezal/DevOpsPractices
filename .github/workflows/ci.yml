@@ -36,9 +36,9 @@ jobs:
           gem install bundle
           bundle install
           bundle exec pod install
-      - name: SwiftLint
-        run: |
-          ./Pods/SwiftLint/swiftlint --strict
+      # - name: SwiftLint
+      #   run: |
+      #     ./Pods/SwiftLint/swiftlint --strict
       - name: Xcode Build
         run: |
           set -o pipefail
