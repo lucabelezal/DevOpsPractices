@@ -27,15 +27,6 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
-
-  swiftlint:
-    name: Run Swiftlint
-    needs: build
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-        run: |
-            bundle exec pod install
       - name: SwiftLint
         run: |
           ./Pods/SwiftLint/swiftlint --strict
