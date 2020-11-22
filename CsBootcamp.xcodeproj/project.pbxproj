@@ -1148,7 +1148,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CsBootcamp/Pods-CsBootcamp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CsBootcamp/Pods-CsBootcamp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -1161,7 +1161,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CsBootcamp/Pods-CsBootcamp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CsBootcamp/Pods-CsBootcamp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3ED3BA2AC6F7CD8A1565F068 /* [CP] Check Pods Manifest.lock */ = {
@@ -1188,7 +1188,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CsBootcampTests/Pods-CsBootcampTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CsBootcampTests/Pods-CsBootcampTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
@@ -1201,7 +1201,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CsBootcampTests/Pods-CsBootcampTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CsBootcampTests/Pods-CsBootcampTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8EC1ACE055A101289EEF3986 /* [CP] Check Pods Manifest.lock */ = {
