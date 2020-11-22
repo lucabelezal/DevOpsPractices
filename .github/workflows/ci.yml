@@ -7,9 +7,9 @@ on:
   pull_request:
     branches:
       - develop
-      - feature/**
-      - hotfix/**
-      - bugfix/**
+      - feature/*
+      - hotfix/*
+      - bugfix/*
 
 jobs:
   build:
@@ -22,6 +22,7 @@ jobs:
         run: |
           gem install bundler:1.16.6
           bundle install
+          bundle exec pod install
       - name: Xcode Build
         run: |
           set -o pipefail
