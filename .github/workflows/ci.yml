@@ -20,21 +20,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install Dependencies
         run: |
-          export LC_ALL=en_US.UTF-8
-          export LANG=en_US.UTF-8
-          export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/"
-          sudo xcode-select -s /Applications/Xcode.app
-          xcodebuild -sdk -version
-          ruby -v
-          rm -rf ~/Library/Developer/Xcode/DerivedData/ModuleCache
-          rm -fR ~/.gem
-          gem install bundler --no-document 
-          bundle --version
-          bundle update --bundler
-          bundle install --path ~/.gem
-          bundle install --path vendor/bundle
-          bundle exec pod install
-          brew install swiftlint
+          gem install bundler:1.16.6
+          bundle install
       - name: Xcode Build
         run: |
           set -o pipefail
