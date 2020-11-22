@@ -19,25 +19,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.45.0
         with:
           ruby-version: 2.6.3
-          bundler-cache: true
       - name: Install Dependencies
         run: |
-          brew install swiftlint
-          brew install rbenv
-          brew install rbenv-gemset
-          rbenv install 2.6.3
-          rbenv global 2.6.3
-          export PATH="$HOME/.rbenv/bin:$PATH"
-          eval "$(rbenv init -)"
-          export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-          gem env home
-          ruby -v
-          rm -rf Podfile.lock
-          rm -rf Gemfile.lock
-          gem install bundle
+          # brew install swiftlint
+          # brew install rbenv
+          # brew install rbenv-gemset
+          # export PATH="$HOME/.rbenv/bin:$PATH"
+          # eval "$(rbenv init -)"
+          # export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+          # gem env home
+          # ruby -v
+          # rm -rf Podfile.lock
+          # rm -rf Gemfile.lock
+          # gem install bundle
           bundle install
           bundle exec pod install
       - name: Xcode Build
