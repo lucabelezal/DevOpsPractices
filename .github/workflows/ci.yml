@@ -55,6 +55,7 @@ jobs:
           set -o pipefail
           gem install bundler:1.16.6
           bundle install
+          bundle exec pod install
           bundle exec fastlane tests
       - name: Convert Logs
         run: |
