@@ -24,9 +24,18 @@ jobs:
           ruby-version: 2.6.3
           bundler-cache: true
       - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           bundle install
           bundle exec pod install
+      - name: Cache Ruby - Bundler
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
       - name: Xcode Build
         run: |
           set -o pipefail xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
