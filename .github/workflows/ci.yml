@@ -28,7 +28,6 @@ jobs:
           bundle --version
           export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/"
           rm -fR ~/.gem
-          rbenv install -s # It will get ".ruby-version" file and skip silently if already exists.
           gem install bundler
           ruby -v
           bundle update --bundler
