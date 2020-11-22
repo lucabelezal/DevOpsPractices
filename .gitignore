@@ -4,6 +4,7 @@
 #
 
 ## Build generated
+Coverage/
 build/
 vendor/
 .bundle

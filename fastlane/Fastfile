@@ -1,0 +1,40 @@
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    setup_ci(provider: "travis")
+    match(readonly: true)
+    number = sh('date "+%Y.%m.%d.%H.%M"')
+    increment_build_number(xcodeproj: "COVIDWatch.xcodeproj", build_number: number)
+    build_app(workspace: "COVIDWatch.xcworkspace", scheme: "covidwatch-ios-prod")
+    testflight(apple_id: "1504929027", distribute_external: true, groups: ["Public Link"], changelog: "Daily Beta for " + Date.today.to_s)
+  end
+
+  desc "Run UI and Unit Tests"
+  lane :tests do
+    run_tests(
+      workspace: "CsBootcamp.xcworkspace",
+      devices: ["iPhone 11"],
+      reinstall_app: true,
+      code_coverage: true,
+      derived_data_path: "Build",
+      scheme: "CsBootcamp"
+  )
+  end
+
+  desc "Build Only"
+  lane :build do
+    build_app(workspace: "CsBootcamp.xcworkspace", scheme: "CsBootcamp", skip_codesigning: true, skip_archive: true)
+  end
+
+  desc "SwiftLint"
+  lane :lint do
+    swiftlint(executable: 'Pods/SwiftLint/swiftlint', strict: true)
+  end
+
+end

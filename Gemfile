@@ -1,5 +1,7 @@
-# frozen_string_literal: true
-
-source "https://rubygems.org"
-
-gem 'cocoapods', '~> 1.5.0'
+source 'https://rubygems.org' do
+    gem 'bundler'
+    gem 'fastlane'
+    gem 'cocoapods'
+    gem 'xcpretty'
+    gem 'slather'
+end
