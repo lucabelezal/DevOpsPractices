@@ -23,13 +23,13 @@ jobs:
           gem install bundler:1.16.6
           bundle install
           bundle exec pod install
+      - name: SwiftLint
+        run: |
+          ./Pods/SwiftLint/swiftlint --strict
       - name: Xcode Build
         run: |
           set -o pipefail
           xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
-      - name: SwiftLint
-        run: |
-          ./Pods/SwiftLint/swiftlint --strict
 
   test:
     name: Run Tests
