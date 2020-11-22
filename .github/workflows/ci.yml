@@ -18,10 +18,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Install Dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
         run: |
           gem install bundler:1.16.6
-          bundle install
+          bundle install --path vendor/bundle
           bundle exec pod install
       - name: SwiftLint
         run: |
