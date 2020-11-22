@@ -18,18 +18,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Install Dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.3
+          bundler-cache: true
         run: |
           brew install rbenv
+          brew install rbenv-gemset
           brew install swiftlint
           export PATH="$HOME/.rbenv/bin:$PATH"
           eval "$(rbenv init -)"
           export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
           gem env home
           ruby -v
-          gem install bundler
+          gem install bundle
           bundle install
           bundle exec pod install
+
       - name: SwiftLint
         run: |
           ./Pods/SwiftLint/swiftlint --strict
