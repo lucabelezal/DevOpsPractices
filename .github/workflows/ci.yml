@@ -32,6 +32,7 @@ jobs:
           bundle --version
           bundle update --bundler
           bundle install --path ~/.gem
+          bundle install --path vendor/bundle
           bundle exec pod install
           brew install swiftlint
       - name: Xcode Build
