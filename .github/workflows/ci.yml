@@ -25,10 +25,9 @@ jobs:
           export PATH="$HOME/.rbenv/bin:$PATH"
           eval "$(rbenv init -)"
           export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-          rm -fR ~/.gem
+          gem env home
           ruby -v
           gem install bundler
-          bundle update --bundler
           bundle install
           bundle exec pod install
       - name: SwiftLint
