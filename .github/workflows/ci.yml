@@ -34,8 +34,6 @@ jobs:
           bundle install --path ~/.gem
           bundle exec pod install
           brew install swiftlint
-          chmod +x scripts/run_swiftlint.sh
-          chmod +x scripts/xcov-to-sonarqube-generic.sh
       - name: Xcode Build
         run: |
           set -o pipefail
