@@ -64,7 +64,9 @@ jobs:
       run: |
         brew install sonar-scanner
         brew install swiftlint
-        gem install slather
+        bundle install
+        bundle exec pod install
+        bundle exec fastlane tests
               
     - name: Run Build and Test
       run: |
