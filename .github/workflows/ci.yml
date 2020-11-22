@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Run Build
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -22,14 +22,14 @@ jobs:
         run: |
           export LC_ALL=en_US.UTF-8
           export LANG=en_US.UTF-8
+          export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/"
           sudo xcode-select -s /Applications/Xcode.app
           xcodebuild -sdk -version
-          rm -rf ~/Library/Developer/Xcode/DerivedData/ModuleCache
-          bundle --version
-          export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/"
-          rm -fR ~/.gem
-          gem install bundler
           ruby -v
+          rm -rf ~/Library/Developer/Xcode/DerivedData/ModuleCache
+          rm -fR ~/.gem
+          gem install bundler --no-rdoc --no-ri
+          bundle --version
           bundle update --bundler
           bundle install --path ~/.gem
           bundle exec pod install
@@ -40,6 +40,7 @@ jobs:
           xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
 
   swiftlint:
+    name: Run Swiftlint
     needs: build
     runs-on: macos-latest
     steps:
@@ -49,6 +50,7 @@ jobs:
           ./Pods/SwiftLint/swiftlint --strict
 
   test:
+    name: Run Tests
     needs: [build, swiftlint]
     runs-on: macos-latest
     steps:
