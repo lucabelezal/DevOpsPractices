@@ -50,6 +50,7 @@ jobs:
         run: |
           chmod +x scripts/run_swiftlint.sh
           chmod +x scripts/xcov-to-sonarqube-generic.sh
+          slather coverage --cobertura-xml ${params} ${project}
           scripts/xcov-to-sonarqube-generic.sh build/Logs/Test/Run-CsBootcamp > coverage.xml
       - name: Install SonarCloud
         run: |
