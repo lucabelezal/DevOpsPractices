@@ -52,9 +52,10 @@ final class FavoritesListDataSource: NSObject, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(FavoriteTableViewCell.self, for: indexPath)!
+        guard let cell = tableView.dequeueReusableCell(FavoriteTableViewCell.self, for: indexPath) else {
+            return UITableViewCell()
+        }
         cell.setup(viewModel: filteredViewModels[indexPath.row].1)
-
         return cell
     }
 

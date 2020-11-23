@@ -36,7 +36,8 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
         return searchBar
     }()
 
-    lazy var searchBarDelegate: SearchBarDelegate = {
+    // TODO
+    lazy var searchBarDelegate: SearchBarDelegate = { // swiftlint:disable:this weak_delegate
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate
     }()
@@ -152,7 +153,7 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
             .trailingAnchor(equalTo: view.trailingAnchor)
 
         removeFilterButtonTopConstraint = removeFilterButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -viewHeights)
-        removeFilterButtonTopConstraint!.isActive = true
+        removeFilterButtonTopConstraint?.isActive = true
 
         tableView
             .topAnchor(equalTo: removeFilterButton.bottomAnchor)

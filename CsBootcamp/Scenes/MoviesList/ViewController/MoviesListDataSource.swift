@@ -71,7 +71,9 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(MovieCollectionViewCell.self, for: indexPath)!
+        guard let cell = collectionView.dequeueReusableCell(MovieCollectionViewCell.self, for: indexPath) else {
+            return UICollectionViewCell()
+        }
         cell.setup(viewModel: filteredViewModels[indexPath.item].1)
 
         cell.didFavoriteButtonPressed = { [weak self] button in
@@ -98,7 +100,11 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
         switch kind {
         case UICollectionView.elementKindSectionFooter:
 
-            let footer = collectionView.dequeueReusableSupplementaryView(ActivityIndicatorFooterView.self, ofKind: UICollectionView.elementKindSectionFooter, for: indexPath)!
+            guard let footer = collectionView.dequeueReusableSupplementaryView(
+                    ActivityIndicatorFooterView.self,
+                    ofKind: UICollectionView.elementKindSectionFooter, for: indexPath) else {
+                return UICollectionReusableView()
+            }
 
             if let indicatorView = indicatorView {
                 footer.setup(activityIndicator: indicatorView)

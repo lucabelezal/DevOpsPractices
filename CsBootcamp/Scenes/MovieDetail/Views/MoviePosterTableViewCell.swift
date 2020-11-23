@@ -80,8 +80,8 @@ public final class MoviePosterTableViewCell: UITableViewCell {
     }
 }
 
-extension MoviePosterTableViewCell {
-    public struct ViewModel {
+public extension MoviePosterTableViewCell { // TODO
+    struct ViewModel {
         let imageURL: URL
         let title: String
         let isFavoriteImage: UIImage

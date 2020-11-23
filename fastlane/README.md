@@ -36,6 +36,16 @@ Build Only
 fastlane ios lint
 ```
 SwiftLint
+### ios coverage
+```
+fastlane ios coverage
+```
+Coverage
+### ios sonarqube
+```
+fastlane ios sonarqube
+```
+Code Quality and Security
 
 ----
 

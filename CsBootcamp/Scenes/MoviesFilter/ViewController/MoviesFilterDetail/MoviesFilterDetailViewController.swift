@@ -30,13 +30,14 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
     }
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupViewHierarchy()
         setupConstraints()
         tableView.reloadData()
-        super.viewDidLoad()
     }
 
-    override func viewWillDisappear(_: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if let indexPath = tableView.indexPathForSelectedRow {
             didSelectOptionAtIndex?(indexPath.row)
         }

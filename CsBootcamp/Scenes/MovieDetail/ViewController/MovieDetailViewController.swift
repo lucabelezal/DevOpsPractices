@@ -73,7 +73,7 @@ final class MovieDetailViewController: UIViewController, MovieDetailView {
 }
 
 extension MovieDetailViewController {
-    public struct ViewModel {
+    struct ViewModel {
         let poster: MoviePosterTableViewCell.ViewModel
         let releaseDate: MovieTextTableViewCell.ViewModel
         let genres: MovieTextTableViewCell.ViewModel

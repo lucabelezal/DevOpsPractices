@@ -87,9 +87,9 @@ final class FavoriteMoviesListCoreDataGateway: FavoriteMoviesListGateway {
             let movies = moviesCoreData.map { movieCoreData in
                 Movie(
                     id: Int(movieCoreData.id),
-                    genreIds: movieCoreData.genres.map {
-                        genre in
-                        (genre as! GenreCoreData).id
+                    genreIds: movieCoreData.genres.map { genre in
+                        // TODO
+                        (genre as! GenreCoreData).id // swiftlint:disable:this force_cast
                     },
                     title: movieCoreData.title,
                     overview: movieCoreData.overview,
@@ -110,7 +110,7 @@ final class FavoriteMoviesListCoreDataGateway: FavoriteMoviesListGateway {
 
         do {
             let count = try coreDataStack.context.count(for: request)
-            return .success(count > 0)
+            return .success(count > 0) // swiftlint:disable:this empty_count
         } catch {
             return .failure(error)
         }

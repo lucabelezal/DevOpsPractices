@@ -8,7 +8,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let docsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // TODO
+        let docsPath = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first! // swiftlint:disable:this force_unwrapping
         print(docsPath)
 
         cacheGenresIfNeeded()

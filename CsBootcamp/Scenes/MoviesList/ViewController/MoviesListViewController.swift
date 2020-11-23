@@ -73,7 +73,8 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
         return dataSource
     }()
 
-    lazy var searchBarDelegate: SearchBarDelegate = {
+    // TODO
+    lazy var searchBarDelegate: SearchBarDelegate = { // swiftlint:disable:this weak_delegate
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate
     }()
@@ -147,7 +148,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
     }
 
     private func searchResults(from predicate: String, didReturnCount count: Int) {
-        let isEmptySearch = count == 0 && !predicate.isEmpty
+        let isEmptySearch = count == 0 && !predicate.isEmpty // swiftlint:disable:this empty_count
         emptySearchView.isHidden = !isEmptySearch
         if isEmptySearch {
             emptySearchView.setup(viewModel: MoviesListErrorViewModel.defaultEmptySearch(predicate: predicate))
