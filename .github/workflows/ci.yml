@@ -28,6 +28,9 @@ jobs:
         run: |
           bundle install
           bundle exec pod install
+      - name: Run SwiftLint
+        run: |
+          fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
       - name: Xcode Build
         run: |
           set -o pipefail xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
@@ -63,20 +66,20 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        brew install sonar-scanner
+        # brew install sonar-scanner
         brew install swiftlint
         bundle install
         bundle exec pod install
         bundle exec fastlane tests
               
-    - name: Run Build and Test
+    - name: Run Test Without Building
       env:
         project: 'CsBootcamp.xcodeproj'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: CsBootcamp
         destination: 'name=iPhone 11'
       run: |
-        xcodebuild build test -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild test-without-building -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
                 
     - name: Run Slather Coverage
       env:
@@ -87,16 +90,6 @@ jobs:
         --binary-basename CsBootcamp'
       run: |
         slather coverage --sonarqube-xml ${params} ${project}
-         
-    - name: Run SwiftLint
-      run: |
-        fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
-        
-    - name: Send Reports to Sonar
-      run: |
-        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send Code Coverage to Codecov
       if: github.ref == 'refs/heads/develop'
@@ -104,9 +97,14 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./reports/cobertura.xml
-
-    # - name: SonarCloud Scan
-    #   uses: SonarSource/sonarcloud-github-action@master
+        
+    # - name: Send Reports to Sonar
+    #   run: |
+    #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
     #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
