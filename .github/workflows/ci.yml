@@ -30,7 +30,6 @@ jobs:
           set -o pipefail xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
   test:
     name: Run Tests
-    needs: build
     runs-on: macos-latest
     steps:
       - name: Checkout repo
@@ -46,7 +45,6 @@ jobs:
           bundle exec pod install
           bundle exec fastlane tests
   sonar:
-    needs: [build, test]
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
