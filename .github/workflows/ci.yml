@@ -74,7 +74,7 @@ jobs:
         scheme: CsBootcamp
         destination: 'name=iPhone 11'
       run: |
-        xcodebuild test-without-building -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild test -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
     - name: Run Slather Coverage
       env:
         project: 'CsBootcamp.xcodeproj'
