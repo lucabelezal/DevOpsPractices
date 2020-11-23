@@ -37,7 +37,7 @@ jobs:
 
   test:
     name: Run Tests
-    needs: build
+    # needs: build
     runs-on: macos-latest
     steps:
       - name: Checkout repo
@@ -54,7 +54,7 @@ jobs:
           bundle exec fastlane tests
 
   sonar:
-    needs: [build, test]
+    # needs: [build, test]
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
