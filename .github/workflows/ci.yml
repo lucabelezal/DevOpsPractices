@@ -69,23 +69,23 @@ jobs:
         bundle exec fastlane tests
               
     - name: Run Build and Test
-      run: |
-        xcodebuild build test -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
       env:
         project: 'CsBootcamp.xcodeproj'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: CsBootcamp
         destination: 'name=iPhone 11'
+      run: |
+        xcodebuild build test -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
                 
     - name: Run Slather Coverage
-      run: |
-        slather coverage --sonarqube-xml ${params} ${project}
       env:
         project: 'CsBootcamp.xcodeproj'
         params: '--build-directory ./DerivedData
         --output-directory ./reports
         --scheme CsBootcamp
         --binary-basename CsBootcamp'
+      run: |
+        slather coverage --sonarqube-xml ${params} ${project}
          
     - name: Run SwiftLint
       run: |
