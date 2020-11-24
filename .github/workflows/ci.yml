@@ -27,7 +27,7 @@ jobs:
           bundle exec pod install
       - name: Xcode Build
         run: |
-          set -o pipefail xcodebuild build -workspace CsBootcamp.xcworkspace -scheme 'CsBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
+          set -o pipefail xcodebuild build -workspace CSBootcamp.xcworkspace -scheme 'CSBootcamp' CODE_SIGNING_ALLOWED=NO | xcpretty
   test:
     name: Run Tests
     runs-on: macos-latest
@@ -64,20 +64,20 @@ jobs:
               
     - name: Run Build and Test
       env:
-        project: 'CsBootcamp.xcodeproj'
+        project: 'CSBootcamp.xcodeproj'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
-        scheme: CsBootcamp
+        scheme: CSBootcamp
         destination: 'name=iPhone 11'
       run: |
-        xcodebuild build test -workspace CsBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild build test -workspace CSBootcamp.xcworkspace -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
                 
     - name: Run Slather Coverage
       env:
-        project: 'CsBootcamp.xcodeproj'
+        project: 'CSBootcamp.xcodeproj'
         params: '--build-directory ./DerivedData
         --output-directory ./reports
-        --scheme CsBootcamp
-        --binary-basename CsBootcamp'
+        --scheme CSBootcamp
+        --binary-basename CSBootcamp'
       run: |
         slather coverage --sonarqube-xml ${params} ${project}
          

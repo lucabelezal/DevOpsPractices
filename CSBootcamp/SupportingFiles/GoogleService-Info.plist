@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>604228841515-njt7ad3e9tmn5l9hr5420i3io90l89dl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.604228841515-njt7ad3e9tmn5l9hr5420i3io90l89dl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDtN2Z-_3ziNkRTtrvwieC3p1NWlb7q5o0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>604228841515</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>br.com.csbootcamp</string>
+	<key>PROJECT_ID</key>
+	<string>devopspractices-da086</string>
+	<key>STORAGE_BUCKET</key>
+	<string>devopspractices-da086.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:604228841515:ios:a6bb094363b02334973a6e</string>
+	<key>DATABASE_URL</key>
+	<string>https://devopspractices-da086.firebaseio.com</string>
+</dict>
+</plist>
