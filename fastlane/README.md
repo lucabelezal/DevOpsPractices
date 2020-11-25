@@ -31,11 +31,6 @@ Push a new beta build to Firebase App Distribution
 fastlane ios tests
 ```
 Run UI and Unit Tests
-### ios build
-```
-fastlane ios build
-```
-Build Only
 ### ios screenshots
 ```
 fastlane ios screenshots

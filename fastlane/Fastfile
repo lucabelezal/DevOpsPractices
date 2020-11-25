@@ -19,11 +19,24 @@ platform :ios do
     )
   end
 
+  private_lane :commit_increment_build_number do 
+    git_commit(
+      path: [
+      "./CSBootcampTests/Info.plist", 
+      "./CSBootcamp.xcodeproj/project.pbxproj", 
+      "./CSBootcamp/SupportingFiles/Info.plist"
+    ], 
+      message: "Increment Build Number"
+    )
+  end
+
   desc "Push a new beta build to Firebase App Distribution"
   lane :beta do
     scan
     build_number = get_build_number(xcodeproj: $project)
     increment_build_number(xcodeproj: $project, build_number: Integer(build_number) + 1)
+    set_build_number_repository(xcodeproj: $project)
+    commit_increment_build_number
     gym
     distribute
   end

@@ -1,5 +1,5 @@
-storage_mode('git')
-type('development') #appstore
+storage_mode("git")
+type("adhoc")
 app_identifier(ENV["BUNDLE_IDENTIFIER"])
 
 #https://docs.fastlane.tools/actions/match/#match
