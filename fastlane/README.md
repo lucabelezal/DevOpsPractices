@@ -16,11 +16,16 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
+### ios distribute
+```
+fastlane ios distribute
+```
+Push a new beta build to Firebase App Distribution
 ### ios beta
 ```
 fastlane ios beta
 ```
-Push a new beta build to TestFlight
+Push a new beta build to Firebase App Distribution
 ### ios tests
 ```
 fastlane ios tests
@@ -31,6 +36,11 @@ Run UI and Unit Tests
 fastlane ios build
 ```
 Build Only
+### ios screenshots
+```
+fastlane ios screenshots
+```
+Generates screenshots
 ### ios lint
 ```
 fastlane ios lint

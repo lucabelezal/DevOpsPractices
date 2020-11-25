@@ -10,6 +10,8 @@ target 'CSBootcamp' do
   pod 'Moya'
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Performance'
 
   target 'CSBootcampTests' do
     inherit! :search_paths

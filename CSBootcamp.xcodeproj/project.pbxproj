@@ -41,7 +41,6 @@
 		6E3FA53C2077FC90001EB4D0 /* MoviesFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3FA53B2077FC90001EB4D0 /* MoviesFilterInteractor.swift */; };
 		6E3FA5412077FE1E001EB4D0 /* MoviesFilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3FA5402077FE1E001EB4D0 /* MoviesFilterPresenter.swift */; };
 		6E5ABABC20751E8000396156 /* ActivityIndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ABABB20751E8000396156 /* ActivityIndicatorFooterView.swift */; };
-		B389CBF0256DAB0500FE96B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B389CBEF256DAB0500FE96B2 /* GoogleService-Info.plist */; };
 		B3EC18E9256DD11D003621CD /* GenresCacheCoreDataGatewaySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC18B7256DD11D003621CD /* GenresCacheCoreDataGatewaySpec.swift */; };
 		B3EC18EA256DD11D003621CD /* FavoriteMoviesListCoreDataGatewaySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC18B9256DD11D003621CD /* FavoriteMoviesListCoreDataGatewaySpec.swift */; };
 		B3EC18EB256DD11D003621CD /* GenresListMoyaGatewaySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC18BB256DD11D003621CD /* GenresListMoyaGatewaySpec.swift */; };
@@ -73,6 +72,7 @@
 		B3EC1905256DD11D003621CD /* MoviesListErrorViewModel+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC18E6256DD11D003621CD /* MoviesListErrorViewModel+Equatable.swift */; };
 		B3EC1906256DD11D003621CD /* ViewModel+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC18E7256DD11D003621CD /* ViewModel+Equatable.swift */; };
 		B3EC1907256DD11D003621CD /* MoviesListCollectionViewCellViewModel+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EC18E8256DD11D003621CD /* MoviesListCollectionViewCellViewModel+Equatable.swift */; };
+		B3EC1A1A256EC5EE003621CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3EC1A19256EC5EE003621CD /* GoogleService-Info.plist */; };
 		BA0867B1206C160400CDA3D9 /* UIActivityIndicatorView+SetAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0867B0206C160400CDA3D9 /* UIActivityIndicatorView+SetAnimating.swift */; };
 		BA0867E5206D877500CDA3D9 /* MoviesListInteractorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0867E4206D877500CDA3D9 /* MoviesListInteractorType.swift */; };
 		BA0867EA206D879E00CDA3D9 /* MoviesListShowDetailInteractorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0867E9206D879E00CDA3D9 /* MoviesListShowDetailInteractorType.swift */; };
@@ -187,7 +187,6 @@
 		736C8CB7C3158EC0BD215E87 /* Pods-CsBootcamp.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CsBootcamp.test.xcconfig"; path = "Pods/Target Support Files/Pods-CsBootcamp/Pods-CsBootcamp.test.xcconfig"; sourceTree = "<group>"; };
 		74286D7E2AA5B95A32892C61 /* Pods-CsBootcamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CsBootcamp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CsBootcamp/Pods-CsBootcamp.release.xcconfig"; sourceTree = "<group>"; };
 		843DBFF20946D61CA211FFC3 /* Pods-CsBootcampTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CsBootcampTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CsBootcampTests/Pods-CsBootcampTests.release.xcconfig"; sourceTree = "<group>"; };
-		B389CBEF256DAB0500FE96B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3EC187F256DD07F003621CD /* CSBootcampTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSBootcampTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3EC1883256DD07F003621CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3EC18B7256DD11D003621CD /* GenresCacheCoreDataGatewaySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenresCacheCoreDataGatewaySpec.swift; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 		B3EC18E6256DD11D003621CD /* MoviesListErrorViewModel+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoviesListErrorViewModel+Equatable.swift"; sourceTree = "<group>"; };
 		B3EC18E7256DD11D003621CD /* ViewModel+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewModel+Equatable.swift"; sourceTree = "<group>"; };
 		B3EC18E8256DD11D003621CD /* MoviesListCollectionViewCellViewModel+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoviesListCollectionViewCellViewModel+Equatable.swift"; sourceTree = "<group>"; };
+		B3EC1A19256EC5EE003621CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA0867B0206C160400CDA3D9 /* UIActivityIndicatorView+SetAnimating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+SetAnimating.swift"; sourceTree = "<group>"; };
 		BA0867E4206D877500CDA3D9 /* MoviesListInteractorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListInteractorType.swift; sourceTree = "<group>"; };
 		BA0867E9206D879E00CDA3D9 /* MoviesListShowDetailInteractorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListShowDetailInteractorType.swift; sourceTree = "<group>"; };
@@ -555,8 +555,8 @@
 			children = (
 				BA18249D20654743004405A3 /* Assets.xcassets */,
 				BA18249F20654743004405A3 /* LaunchScreen.storyboard */,
+				B3EC1A19256EC5EE003621CD /* GoogleService-Info.plist */,
 				BA1824A220654743004405A3 /* Info.plist */,
-				B389CBEF256DAB0500FE96B2 /* GoogleService-Info.plist */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -1074,6 +1074,7 @@
 				BA18249020654743004405A3 /* Frameworks */,
 				BA18249120654743004405A3 /* Resources */,
 				364B5853930676A542AD8609 /* [CP] Embed Pods Frameworks */,
+				B3EC19B0256EC194003621CD /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1141,8 +1142,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA1824A120654743004405A3 /* LaunchScreen.storyboard in Resources */,
+				B3EC1A1A256EC5EE003621CD /* GoogleService-Info.plist in Resources */,
 				BA18249E20654743004405A3 /* Assets.xcassets in Resources */,
-				B389CBF0256DAB0500FE96B2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,27 +1158,39 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CSBootcamp/Pods-CSBootcamp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1220,6 +1233,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		B3EC19B0256EC194003621CD /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		E264645B6FB1E9E5E84CBDBE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1544,15 +1577,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2LFFGTNB7R;
 				INFOPLIST_FILE = CSBootcamp/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.csbootcamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TVOS_DEPLOYMENT_TARGET = 14.2;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Test;
 		};
@@ -1677,15 +1714,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2LFFGTNB7R;
 				INFOPLIST_FILE = CSBootcamp/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.csbootcamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TVOS_DEPLOYMENT_TARGET = 14.2;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1695,15 +1736,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 2LFFGTNB7R;
 				INFOPLIST_FILE = CSBootcamp/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.csbootcamp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TVOS_DEPLOYMENT_TARGET = 14.2;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
