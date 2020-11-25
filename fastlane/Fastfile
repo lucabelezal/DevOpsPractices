@@ -20,10 +20,12 @@ platform :ios do
   end
 
   private_lane :commit_increment_build_number do 
-    last_build_number = get_build_number(xcodeproj: $project)
-    build_number = increment_build_number(xcodeproj: $project, build_number: $last_build_number.to_i + 1)
-    commit_version_bump(xcodeproj: "CSBootcamp.xcodeproj", message:"[ci-skip] Version Bump to #{$build_number}")
-    git_commit(path:"./", message:"[ci-skip] Updated CHANGELOG for Build #{$build_number}")
+    project = "CSBootcamp.xcodeproj"
+    latest_build_number = get_build_number(xcodeproj: project)
+    new_build_number = (latest_build_number.to_i + 1).to_s
+    increment_build_number(xcodeproj: project, build_number: new_build_number)
+    commit_version_bump(xcodeproj: project, message:"[ci-skip] Version Bump to #{new_build_number}")
+    git_commit(path:"./", message:"[ci-skip] Updated for Build #{new_build_number}")
     push_to_git_remote
   end
 
