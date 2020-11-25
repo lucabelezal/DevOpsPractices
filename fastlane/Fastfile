@@ -20,18 +20,17 @@ platform :ios do
   end
 
   private_lane :commit_increment_build_number do 
-    git_commit(
-      path: "./",
-      message: "Increment Build Number"
-    )
+    last_build_number = get_build_number(xcodeproj: $project)
+    commit_version_bump(xcodeproj: "CSBootcamp.xcodeproj", message:"[ci-skip] Version Bump to #{$last_build_number}")
+    build_number = increment_build_number(xcodeproj: $project, build_number: $last_build_number.to_i + 1)
+    git_commit(path:"./", message:"[ci-skip] Updated CHANGELOG for Build #{$build_number}")
+    push_to_git_remote
   end
 
   desc "Push a new beta build to Firebase App Distribution"
   lane :beta do
-    scan
-    build_number = get_build_number(xcodeproj: $project)
-    increment_build_number(xcodeproj: $project, build_number: build_number.to_i + 1)
     commit_increment_build_number
+    scan
     gym
     distribute
   end
