@@ -21,11 +21,6 @@ platform :ios do
 
   private_lane :commit_increment_build_number do 
     git_commit(
-      path: [
-      "./CSBootcampTests/Info.plist", 
-      "./CSBootcamp.xcodeproj/project.pbxproj", 
-      "./CSBootcamp/SupportingFiles/Info.plist"
-    ], 
       message: "Increment Build Number"
     )
   end
