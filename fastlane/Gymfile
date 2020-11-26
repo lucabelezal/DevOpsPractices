@@ -4,7 +4,7 @@ clean(true)
 output_directory(".fastlane/output/#{ENV["ENV_NAME"]}")
 output_name("#{ENV["ENV_NAME"]}.ipa")
 export_options({
-  method: "ad-hoc",
+  method: "development", #ad-hoc
 })
 
 #http://docs.fastlane.tools/actions/gym/#gym
