@@ -1,14 +1,7 @@
-devices(["iPhone 8","iPhone 11"])
+devices(["iPhone 11"])
 languages(["en-US", ["pt", "pt_BR"]])
 scheme(ENV["SCHEME"])
 output_directory("build/screenshots")
 clear_previous_screenshots(true)
 override_status_bar(true)
 launch_arguments(["SKIP_ANIMATIONS", "-firstName Felix -lastName Krause"])
-
-# Snapfile for A/B Test Comparison
-# https://docs.fastlane.tools/actions/snapshot/
-# launch_arguments([
-#   "-secretFeatureEnabled YES",
-#   "-secretFeatureEnabled NO"
-# ])

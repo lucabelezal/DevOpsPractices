@@ -1,11 +1,9 @@
-# open_report(true)
-# skip_build(true)
-build_for_testing(true)
+skip_build(true)
 clean(true)
 scheme(ENV["SCHEME"])
-devices(["iPhone 8", "iPhone 11"])
+devices(["iPhone 11"])
 code_coverage(true)
 disable_xcpretty(false)
-output_types("json-compilation-database")
+output_types("html")
 
 #https://docs.fastlane.tools/actions/scan/#scan

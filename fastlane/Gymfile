@@ -3,8 +3,6 @@ scheme(ENV["SCHEME"])
 clean(true)
 output_directory(".fastlane/output/#{ENV["ENV_NAME"]}")
 output_name("#{ENV["ENV_NAME"]}.ipa")
-export_options({
-  method: "development", #ad-hoc
-})
+export_options(method: "development")
 
 #http://docs.fastlane.tools/actions/gym/#gym
