@@ -50,7 +50,7 @@ jobs:
       - name: Install Dependencies
         run: |
           set -o pipefail
-          # brew install sonar-scanner
+          brew install sonar-scanner
           brew install swiftlint
           gem install bundler:2.1.4
           bundle install
@@ -84,14 +84,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./reports/cobertura.xml
 
-      - name: Run SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+      - name: Send Reports to Sonar
+        run: |
+          sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      # - name: Send Reports to Sonar
-      #   run: |
-      #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      #   env:
-      #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
