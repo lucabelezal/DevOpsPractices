@@ -1,0 +1,35 @@
+name: CD
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [master]
+jobs:
+  build:
+    name: Firebase App Distribution
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        set -o pipefail
+        gem install bundler:2.1.4
+        bundle install
+        bundle exec pod install
+
+    - name: Run Beta Distribution
+      run: |
+        set -o pipefail
+        bundle exec fastlane beta
+
+    - name: Create Sentry release
+      uses: getsentry/action-release@v1
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+        SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+      with:
+        environment: staging
