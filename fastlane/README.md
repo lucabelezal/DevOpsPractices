@@ -26,29 +26,39 @@ Push a new beta build to Firebase App Distribution
 fastlane ios beta
 ```
 Push a new beta build to Firebase App Distribution
-### ios tests
+### ios run_tests_app
 ```
-fastlane ios tests
+fastlane ios run_tests_app
 ```
 Run UI and Unit Tests
-### ios screenshots
+### ios run_build_app
 ```
-fastlane ios screenshots
+fastlane ios run_build_app
+```
+Build Only
+### ios run_snapshot
+```
+fastlane ios run_snapshot
 ```
 Generates screenshots
-### ios lint
+### ios run_swiftlint
 ```
-fastlane ios lint
+fastlane ios run_swiftlint
 ```
 SwiftLint
-### ios coverage
+### ios run_slather
 ```
-fastlane ios coverage
+fastlane ios run_slather
 ```
-Coverage
-### ios sonarqube
+Slather
+### ios run_codecov_reporter
 ```
-fastlane ios sonarqube
+fastlane ios run_codecov_reporter
+```
+Codecov
+### ios run_sonar
+```
+fastlane ios run_sonar
 ```
 Code Quality and Security
 

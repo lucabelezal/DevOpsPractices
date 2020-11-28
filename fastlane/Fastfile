@@ -1,14 +1,13 @@
 default_platform(:ios)
 
 platform :ios do
-
   workspace = "CSBootcamp.xcworkspace"
   project = "CSBootcamp.xcodeproj"
   scheme = ENV["SCHEME"]
   output_name = "#{ENV["ENV_NAME"]}.ipa"
 
   desc "Push a new beta build to Firebase App Distribution"
-  lane :distribute do
+  lane :run_firebase_app_distribution do
     firebase_app_distribution(
       googleservice_info_plist_path: ENV["PATH_INFOPLIST"],
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
@@ -19,76 +18,69 @@ platform :ios do
     )
   end
 
-  # private_lane :commit_increment_build_number do 
-  #   project = "CSBootcamp.xcodeproj"
-  #   latest_build_number = get_build_number(xcodeproj: project)
-  #   new_build_number = (latest_build_number.to_i + 1).to_s
-  #   increment_build_number(xcodeproj: project, build_number: new_build_number)
-  #   commit_version_bump(xcodeproj: project, message:"[ci-skip] Version Bump to #{new_build_number}")
-  #   git_commit(path:"./", message:"[ci-skip] Updated for Build #{new_build_number}")
-  #   create_pull_request(
-  #     api_token: ENV["GITHUB_API_TOKEN"],  
-  #     repo: "lucabelezal/DevOpsPractices",
-  #     title: "Amazing new feature",
-  #     base: "develop",
-  #     body: "Please pull this in!", 
-  #     api_url: "https://github.com/"
-  #   )
-  #   # push_to_git_remote
-  # end
-
   desc "Push a new beta build to Firebase App Distribution"
   lane :beta do
-    # commit_increment_build_number
     scan
     gym
-    distribute
+    run_firebase_app_distribution
   end
 
   desc "Run UI and Unit Tests"
-  lane :tests do
+  lane :run_tests_app do
     run_tests(
       workspace: $workspace,
       devices: ["iPhone 11"],
       reinstall_app: true,
       code_coverage: true,
-      derived_data_path: "Build",
+      derived_data_path: "./DerivedData",
       scheme: $scheme
   )
   end
 
-  # desc "Build Only"
-  # lane :build do
-  #   build_app(workspace: $workspace, scheme: $scheme, skip_codesigning: true, skip_archive: true)
-  # end
+  desc "Build Only"
+  lane :run_build_app do
+    build_app(workspace: $workspace, scheme: $scheme, skip_codesigning: true, skip_archive: true)
+  end
 
   desc "Generates screenshots"
-  lane :screenshots do
+  lane :run_snapshot do
     snapshot
   end
 
   desc "SwiftLint"
-  lane :lint do
-    swiftlint(executable: 'Pods/SwiftLint/swiftlint', strict: true)
+  lane :run_swiftlint do
+    swiftlint(
+      output_file:"./reports/swiftlint.json",
+      reporter:"json" ,
+      ignore_exit_status:"true"
+    )
   end
 
-  desc "Coverage"
-  lane :coverage do
+  desc "Slather"
+  lane :run_slather do
     slather(
       sonarqube_xml: true,
-      build_directory: "build/Build/",
+      build_directory: "./DerivedData",
       input_format: "profdata",
-      output_directory: "Coverage/",
+      output_directory: "./reports",
+      binary_basename: $scheme,
       scheme: $scheme,
       proj: $project,
-      workspace: $workspace,
-      ignore: ["CSBootcamp/*"]
+      workspace: $workspace
+    )
+  end
+  
+  desc "Codecov"
+  lane :run_codecov_reporter do
+    codecov_reporter(
+      token: ENV["CODECOV_TOKEN"]
     )
   end
 
   desc "Code Quality and Security"
-  lane :sonarqube do
+  lane :run_sonar do
     sonar(
+      sonar_login: ENV["SONAR_TOKEN"],
       project_key: "lucabelezal_DevOpsPractices",
       sonar_organization: "skeleton",
       project_name: $scheme,
@@ -96,79 +88,6 @@ platform :ios do
       sonar_url: "https://sonarcloud.io"
     )
   end
-
-  #set_github_release
-
-  # lane :release do
-  #   capture_screenshots                  # generate new screenshots for the App Store
-  #   sync_code_signing(type: "appstore")  # see code signing guide for more information
-  #   build_app(scheme: "MyApp")
-  #   upload_to_app_store                  # upload your app to App Store Connect
-  #   slack(message: "Successfully uploaded a new App Store build")
-  # end
-
-  # lane :beta do
-  #   sync_code_signing(type: "appstore")    # see code signing guide for more information
-  #   build_app(scheme: "MyApp")
-  #   upload_to_testflight
-  #   slack(message: "Successfully distributed a new beta build")
-  # end
-
-  # lane :beta do
-  #   # ...
-  #   build_app
-  
-  #   firebase_app_distribution(
-  #     app: "1:123456789:ios:abcd1234",
-  #     groups: "qa-team, trusted-testers"
-  #   )
-  #   # ...
-  # end
-
-  # lane :production do
-  #   # ...
-  #   build(release: true)
-  #   appstore # Deploy to the AppStore
-  #   # ...
-  # end
-  
-  # lane :beta do
-  #   # ...
-  #   build(release: false)
-  #   crashlytics # Distribute to testers
-  #   # ...
-  # end
-
-  # lane :build do |options|
-  #   # ...
-  #   ipa
-  #   # ...
-  # end
-
-  # lane :deploy do |options|
-  #   # ...
-  #   build(release: true) # that's the important bit
-  #   hockey
-  #   # ...
-  # end
-  
-  # lane :staging do |options|
-  #   # ...
-  #   build # it also works when you don't pass parameters
-  #   hockey
-  #   # ...
-  # end
-  
-  # lane :build do |options|
-  #   scheme = (options[:release] ? "Release" : "Staging")
-  #   build_ios_app(scheme: scheme)
-  # end
-
-#   fastlane [tool] --[option]=[value]
-
-# fastlane deliver --skip_screenshots=true
-# fastlane snapshot --screenshots_path=xxxxx --schema=xxxx
-
 end
 
 
