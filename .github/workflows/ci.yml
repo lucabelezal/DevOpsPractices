@@ -13,11 +13,16 @@ on:
       - fix/*
 jobs:
   build:
-    name: Run Build
+    name: Run Build and Unit Tests
     runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -43,8 +48,10 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install Dependencies
+        if: steps.bundle-cache.outputs.cache-hit != 'true' || steps.pods-cache.outputs.cache-hit != 'true'
         run: |
           set -o pipefail
+          # brew install sonar-scanner
           brew install swiftlint
           gem install bundler:2.1.4
           bundle install
@@ -55,80 +62,36 @@ jobs:
           set -o pipefail
           bundle exec fastlane run_swiftlint
 
-      - name: Xcode Build
+      - name: Run Build
         run: |
           set -o pipefail
           bundle exec fastlane run_build_app
-
-  test:
-    needs: build
-    name: Run Tests
-    runs-on: macos-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Install Dependencies
-        if: steps.bundle-cache.outputs.cache-hit != 'true' || steps.pods-cache.outputs.cache-hit != 'true'
-        run: |
-          # brew install sonar-scanner
-          gem install bundler:2.1.4
-          bundle install
-          bundle exec pod install
 
       - name: Run Tests
         run: |
           set -o pipefail
           bundle exec fastlane run_tests_app
-
-  sonar:
-    needs: build
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
     
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+      - name: Run Slather
+        run: |
+          set -o pipefail
+          bundle exec fastlane run_slather
 
-    - name: Install Dependencies
-      if: steps.bundle-cache.outputs.cache-hit != 'true' || steps.pods-cache.outputs.cache-hit != 'true'
-      run: |
-        # brew install sonar-scanner
-        gem install bundler:2.1.4
-        bundle install
-        bundle exec pod install
+      - name: Send to Codecov
+        if: github.ref == 'refs/heads/develop'
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./reports/cobertura.xml
 
-    - name: Run SwiftLint
-      run: |
-        bundle exec fastlane run_swiftlint
+      - name: Run SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-    - name: Run Tests
-      run: |
-        set -o pipefail
-        bundle exec fastlane run_tests_app
-                
-    - name: Run Slather
-      run: |
-        set -o pipefail
-        bundle exec fastlane run_slather
-
-    - name: Send to Codecov
-      if: github.ref == 'refs/heads/develop'
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./reports/cobertura.xml
-
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-    # - name: Send Reports to Sonar
-    #   run: |
-    #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-    #   env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Send Reports to Sonar
+      #   run: |
+      #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      #   env:
+      #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
