@@ -9,6 +9,7 @@ target 'CSBootcamp' do
   pod 'Kingfisher'
   pod 'Moya'
   pod 'SwiftLint'
+  pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '6.0.10'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Performance'

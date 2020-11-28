@@ -1,4 +1,5 @@
 import Firebase
+import Sentry
 import UIKit
 
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         setupSearchBarAppearance()
 
         FirebaseApp.configure()
+
+        SentrySDK.start { options in
+            options.dsn = "https://582515bed99d4474aab394023051c88b@o481207.ingest.sentry.io/5535567"
+            options.debug = true // Enabled debug when first installing is always helpful
+        }
+
+        SentrySDK.capture(message: "My first test message")
+//        SentrySDK.crash()
 
         return true
     }
