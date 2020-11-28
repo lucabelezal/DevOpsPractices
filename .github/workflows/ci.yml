@@ -48,7 +48,6 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install Dependencies
-        if: steps.bundle-cache.outputs.cache-hit != 'true' || steps.pods-cache.outputs.cache-hit != 'true'
         run: |
           set -o pipefail
           # brew install sonar-scanner
@@ -58,6 +57,7 @@ jobs:
           bundle exec pod install
 
       - name: Run SwiftLint
+        if: steps.bundle-cache.outputs.cache-hit != 'true' || steps.pods-cache.outputs.cache-hit != 'true'
         run: |
           set -o pipefail
           bundle exec fastlane run_swiftlint
