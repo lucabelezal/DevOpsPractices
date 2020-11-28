@@ -16,9 +16,9 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios distribute
+### ios run_firebase_app_distribution
 ```
-fastlane ios distribute
+fastlane ios run_firebase_app_distribution
 ```
 Push a new beta build to Firebase App Distribution
 ### ios beta

@@ -79,7 +79,7 @@ jobs:
       - name: Run Tests
         run: |
           set -o pipefail
-          bundle exec fastlane tests
+          bundle exec fastlane run_tests_app
 
   sonar:
     needs: build
@@ -107,7 +107,7 @@ jobs:
     - name: Run Tests
       run: |
         set -o pipefail
-        bundle exec fastlane tests
+        bundle exec fastlane run_tests_app
                 
     - name: Run Slather
       run: |
