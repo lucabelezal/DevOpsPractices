@@ -6,7 +6,6 @@ platform :ios do
   scheme = ENV["SCHEME"]
   output_name = "#{ENV["ENV_NAME"]}.ipa"
 
-  desc "Push a new beta build to Firebase App Distribution"
   lane :run_firebase_app_distribution do
     firebase_app_distribution(
       googleservice_info_plist_path: ENV["PATH_INFOPLIST"],
@@ -18,22 +17,26 @@ platform :ios do
     )
   end
 
-  desc "Push a new beta build to Firebase App Distribution"
   lane :beta do
     scan
     gym
     run_firebase_app_distribution
   end
 
-  desc "Run Increment Build Number"
-  lane :run_increment_build_number do
+  lane :release do 
     build_number = increment_build_number()
     git_add
     git_commit(path: "*", message: "Increment new build number - #{build_number}")
     push_to_git_remote(force: true)
+
+    create_pull_request(
+      repo: "lucabelezal/DevOpsPractices",
+      title: "New beta build to Firebase App Distribution",
+      body: "Build number - #{build_number}",
+      api_url: "https://github.com"
+    )
   end
 
-  desc "Run UI and Unit Tests"
   lane :run_tests_app do
     run_tests(
       workspace: $workspace,
@@ -45,17 +48,14 @@ platform :ios do
   )
   end
 
-  desc "Build Only"
   lane :run_build_app do
     build_app(workspace: $workspace, scheme: $scheme, skip_codesigning: true, skip_archive: true)
   end
 
-  desc "Generates screenshots"
   lane :run_snapshot do
     snapshot
   end
 
-  desc "SwiftLint"
   lane :run_swiftlint do
     swiftlint(
       output_file:"./reports/swiftlint.json",
@@ -64,7 +64,6 @@ platform :ios do
     )
   end
 
-  desc "Slather"
   lane :run_slather do
     slather(
       sonarqube_xml: true,
@@ -78,14 +77,12 @@ platform :ios do
     )
   end
   
-  desc "Codecov"
   lane :run_codecov_reporter do
     codecov_reporter(
       token: ENV["CODECOV_TOKEN"]
     )
   end
 
-  desc "Code Quality and Security"
   lane :run_sonar do
     sonar(
       sonar_login: ENV["SONAR_TOKEN"],
