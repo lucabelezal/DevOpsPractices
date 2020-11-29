@@ -20,16 +20,16 @@ jobs:
     #     bundle install
     #     bundle exec pod install
 
-    # - name: Run Beta Distribution
+    # - name: Run Beta Distribution -> Need the fastlane match
     #   run: |
     #     set -o pipefail
     #     bundle exec fastlane beta
 
-    - name: Create Sentry release
-      uses: getsentry/action-release@v1
-      env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-        SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-      with:
-        environment: staging
+    # - name: Create Sentry release -> Container action is only supported on Linux
+    #   uses: getsentry/action-release@v1
+    #   env:
+    #     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+    #     SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+    #     SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+    #   with:
+    #     environment: staging
