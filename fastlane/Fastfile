@@ -33,8 +33,7 @@ platform :ios do
       api_token: ENV["GITHUB_API_TOKEN"],
       repo: "lucabelezal/DevOpsPractices",
       title: "New beta build to Firebase App Distribution",
-      body: "Build number - #{build_number}",
-      api_url: "https://github.com"
+      body: "Build number - #{build_number}"
     )
   end
 
