@@ -16,46 +16,56 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
+### ios run_firebase_app_distribution
+```
+fastlane ios run_firebase_app_distribution
+```
+
 ### ios beta
 ```
 fastlane ios beta
 ```
-Building your App in beta version
+
+### ios release
+```
+fastlane ios release
+```
+
 ### ios run_tests_app
 ```
 fastlane ios run_tests_app
 ```
-Run UI and Unit Tests
+
 ### ios run_build_app
 ```
 fastlane ios run_build_app
 ```
-Build Only
+
 ### ios run_snapshot
 ```
 fastlane ios run_snapshot
 ```
-Generates screenshots
+
 ### ios run_swiftlint
 ```
 fastlane ios run_swiftlint
 ```
-SwiftLint
+
 ### ios run_slather
 ```
 fastlane ios run_slather
 ```
-Slather
+
 ### ios run_codecov_reporter
 ```
 fastlane ios run_codecov_reporter
 ```
-Codecov
+
 ### ios run_sonar
 ```
 fastlane ios run_sonar
 ```
-Code Quality and Security
+
 
 ----
 

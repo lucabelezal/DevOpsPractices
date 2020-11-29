@@ -30,6 +30,7 @@ platform :ios do
     push_to_git_remote(force: true)
 
     create_pull_request(
+      api_token: ENV["GITHUB_API_TOKEN"],
       repo: "lucabelezal/DevOpsPractices",
       title: "New beta build to Firebase App Distribution",
       body: "Build number - #{build_number}",
