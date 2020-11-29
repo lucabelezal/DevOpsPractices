@@ -25,8 +25,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             options.debug = true // Enabled debug when first installing is always helpful
         }
 
-        SentrySDK.capture(message: "My first test message")
-//        SentrySDK.crash()
+        SentrySDK.capture(message: "Test message")
 
         return true
     }
