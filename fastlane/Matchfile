@@ -1,3 +1,14 @@
 storage_mode("git")
 type("development")
 app_identifier(ENV["BUNDLE_IDENTIFIER"])
+force_for_new_devices(true)
+
+
+# git_url "ssh://git@bitbucket.org:7999/abc/project-match.git" #your private git repo ssh link
+# type "development" # Either development, appstore etc.
+# app_identifier 'com.project1.appname'
+# username "member@companyname.com" #This will be the git username
+# shallow_clone true
+# force_for_new_devices true
+# ENV["FASTLANE_PASSWORD"] = "abcdefgh" #Password to access git repo.
+# ENV["MATCH_PASSWORD"] = "password" #Password for the .p12 files saved in git repo.
