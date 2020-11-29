@@ -20,6 +20,11 @@ platform :ios do
 
   desc "Push a new beta build to Firebase App Distribution"
   lane :beta do
+    build_number = increment_build_number()
+    git_add
+    git_commit(path: "*", message: "Increment new build number - #{build_number}")
+    push_to_git_remote
+
     scan
     gym
     run_firebase_app_distribution
