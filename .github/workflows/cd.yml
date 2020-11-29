@@ -13,17 +13,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Dependencies
-      run: |
-        set -o pipefail
-        gem install bundler:2.1.4
-        bundle install
-        bundle exec pod install
+    # - name: Install Dependencies
+    #   run: |
+    #     set -o pipefail
+    #     gem install bundler:2.1.4
+    #     bundle install
+    #     bundle exec pod install
 
-    - name: Run Beta Distribution
-      run: |
-        set -o pipefail
-        bundle exec fastlane beta
+    # - name: Run Beta Distribution
+    #   run: |
+    #     set -o pipefail
+    #     bundle exec fastlane beta
 
     - name: Create Sentry release
       uses: getsentry/action-release@v1

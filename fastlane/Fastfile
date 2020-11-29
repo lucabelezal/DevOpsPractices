@@ -6,18 +6,8 @@ platform :ios do
   scheme = ENV["SCHEME"]
   output_name = "#{ENV["ENV_NAME"]}.ipa"
 
-  lane :run_firebase_app_distribution do
-    firebase_app_distribution(
-      googleservice_info_plist_path: ENV["PATH_INFOPLIST"],
-      firebase_cli_token: ENV['FIREBASE_TOKEN'],
-      ipa_path: "./.fastlane/output/#{output_name}",
-      testers: "lucabelezal@gmail.com",
-      release_notes: "Lots of amazing new features to test out!",
-      debug: true
-    )
-  end
-
   lane :beta do
+    #match
     scan
     gym
     run_firebase_app_distribution
@@ -34,6 +24,26 @@ platform :ios do
       repo: "lucabelezal/DevOpsPractices",
       title: "New beta build to Firebase App Distribution",
       body: "Build number - #{build_number}"
+    )
+
+    github_release = set_github_release(
+      repository_name: "lucabelezal/DevOpsPractices",
+      api_token: ENV["GITHUB_API_TOKEN"],
+      name: "Super New actions",
+      tag_name: "v1.0.0(#{build_number})",
+      description: (File.read("changelog") rescue "No changelog provided"),
+      commitish: "develop"
+    )
+  end
+
+  lane :run_firebase_app_distribution do
+    firebase_app_distribution(
+      googleservice_info_plist_path: ENV["PATH_INFOPLIST"],
+      firebase_cli_token: ENV['FIREBASE_TOKEN'],
+      ipa_path: "./.fastlane/output/#{output_name}",
+      testers: "lucabelezal@gmail.com",
+      release_notes: "Lots of amazing new features to test out!",
+      debug: true
     )
   end
 

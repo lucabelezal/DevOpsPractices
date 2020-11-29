@@ -16,11 +16,6 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios run_firebase_app_distribution
-```
-fastlane ios run_firebase_app_distribution
-```
-
 ### ios beta
 ```
 fastlane ios beta
@@ -29,6 +24,11 @@ fastlane ios beta
 ### ios release
 ```
 fastlane ios release
+```
+
+### ios run_firebase_app_distribution
+```
+fastlane ios run_firebase_app_distribution
 ```
 
 ### ios run_tests_app
