@@ -4,15 +4,15 @@ on:
     branches: 
       - master
       - develop
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - master
-      - develop
-      - feature/*
-      - hotfix/*
-      - bugfix/*
-      - fix/*
+  # pull_request:
+  #   types: [opened, synchronize, reopened]
+  #   branches:
+  #     - master
+  #     - develop
+  #     - feature/*
+  #     - hotfix/*
+  #     - bugfix/*
+  #     - fix/*
 jobs:
   build:
     name: Run Build and Unit Tests
