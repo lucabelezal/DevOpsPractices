@@ -7,13 +7,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private var genresCacher: GenresCacher?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // TODO
-        let docsPath = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask
-        ).first! // swiftlint:disable:this force_unwrapping
-        print(docsPath)
-
         cacheGenresIfNeeded()
         window = MainWindowFactory.make()
         setupSearchBarAppearance()
@@ -22,10 +15,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SentrySDK.start { options in
             options.dsn = "https://582515bed99d4474aab394023051c88b@o481207.ingest.sentry.io/5535567"
-            options.debug = true // Enabled debug when first installing is always helpful
+            options.debug = true
         }
-
-        SentrySDK.capture(message: "Test message")
 
         return true
     }
