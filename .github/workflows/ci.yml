@@ -4,15 +4,15 @@ on:
     branches: 
       - master
       - develop
-  # pull_request:
-  #   types: [opened, synchronize, reopened]
-  #   branches:
-  #     - master
-  #     - develop
-  #     - feature/*
-  #     - hotfix/*
-  #     - bugfix/*
-  #     - fix/*
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - master
+      - develop
+      - feature/*
+      - hotfix/*
+      - bugfix/*
+      - fix/*
 jobs:
   build:
     name: Run Build and Unit Tests
@@ -31,24 +31,6 @@ jobs:
         with:
           ruby-version: 2.6.3
 
-      - name: Cache Ruby Gem
-        uses: actions/cache@v2
-        id: bundle-cache
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
-
-      - name: Cache CocoaPods
-        uses: actions/cache@v2
-        id: pods-cache
-        with:
-          path: Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-
       - name: Install Dependencies
         run: |
           set -o pipefail
@@ -59,7 +41,6 @@ jobs:
           bundle exec pod install
 
       - name: Run SwiftLint
-        if: steps.bundle-cache.outputs.cache-hit != 'true' || steps.pods-cache.outputs.cache-hit != 'true'
         run: |
           set -o pipefail
           bundle exec fastlane run_swiftlint
