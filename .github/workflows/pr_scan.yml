@@ -20,13 +20,12 @@ jobs:
       with:
         ruby-version: 2.6.3
 
-    - name: Install Tools
+    - name: Prepare Dependency Managers
       run: |
           set -o pipefail
           brew install sonar-scanner
           brew install swiftlint
-          gem install bundler:2.1.4
-          bundle install
+          gem install bundler -v
 
     - name: Check Dependencie Cache
       uses: actions/cache@v1
@@ -38,6 +37,7 @@ jobs:
     - name: Install Dependencies
       if: steps.pods-cache.outputs.cache-hit != 'true'
       run: |
+        bundle install
         bundle exec pod install
       env:
          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
