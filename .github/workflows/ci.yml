@@ -80,7 +80,6 @@ jobs:
           bundle exec fastlane run_slather
 
       - name: Send to Codecov
-        if: github.ref == 'refs/heads/develop'
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
