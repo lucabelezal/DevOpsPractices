@@ -36,9 +36,9 @@ jobs:
     - name: Build and test
       run: |
         xcodebuild -version
-        xcodebuild build test -xcworkspace "${xcworkspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
       env:
-        xcworkspace: 'CSBootcamp.xcworkspace'
+        workspace: 'CSBootcamp.xcworkspace'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: 'CSBootcamp'
         destination: 'name=iPhone 11'
@@ -89,19 +89,19 @@ jobs:
       
     - name: Build and test
       run: |
-        xcodebuild build test -project ${project} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild build test -workspace ${workspace} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
       env:
-        xcworkspace: 'CSBootcamp.xcworkspace'
+        workspace: 'CSBootcamp.xcworkspace'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: CSBootcamp
         destination: 'name=iPhone 11'
 
     - name: Slather
       run: |
-        slather coverage --sonarqube-xml ${params} ${xcworkspace}
-        slather coverage --cobertura-xml ${params} ${xcworkspace}
+        slather coverage --sonarqube-xml ${params} ${workspace}
+        slather coverage --cobertura-xml ${params} ${workspace}
       env:
-        xcworkspace: 'CSBootcamp.xcworkspace'
+        workspace: 'CSBootcamp.xcworkspace'
         params: '--build-directory ./DerivedData
         --output-directory ./reports
         --scheme CSBootcamp
