@@ -1049,6 +1049,8 @@
 			buildConfigurationList = B3EC1889256DD07F003621CD /* Build configuration list for PBXNativeTarget "CSBootcampTests" */;
 			buildPhases = (
 				F4732BF7A35305F5F4F43A96 /* [CP] Check Pods Manifest.lock */,
+				B3968CAF25853FEB00461463 /* SwiftLint */,
+				B3968CAE25853FC100461463 /* SwiftFormat */,
 				B3EC187B256DD07F003621CD /* Sources */,
 				B3EC187C256DD07F003621CD /* Frameworks */,
 				B3EC187D256DD07F003621CD /* Resources */,
@@ -1235,6 +1237,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		B3968CAE25853FC100461463 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+		B3968CAF25853FEB00461463 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		B3EC19B0256EC194003621CD /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
