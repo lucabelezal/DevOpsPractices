@@ -26,7 +26,7 @@ jobs:
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
     - name: Install Dependencies
-      if: steps.pods-cache.outputs.cache-hit != 'true'
+      # if: steps.pods-cache.outputs.cache-hit != 'true'
       run: |
         bundle install
         bundle exec pod install
@@ -65,22 +65,22 @@ jobs:
           brew install swiftlint
           gem install bundler
 
-    - name: Cache RubyGems
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: ${{ runner.os }}-gem-
+    # - name: Cache RubyGems
+    #   uses: actions/cache@v1
+    #   with:
+    #     path: vendor/bundle
+    #     key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+    #     restore-keys: ${{ runner.os }}-gem-
 
-    - name: Cache Pods
-      uses: actions/cache@v1
-      id: pods-cache
-      with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+    # - name: Cache Pods
+    #   uses: actions/cache@v1
+    #   id: pods-cache
+    #   with:
+    #     path: Pods
+    #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
     - name: Install Dependencies
-      if: steps.pods-cache.outputs.cache-hit != 'true'
+      # if: steps.pods-cache.outputs.cache-hit != 'true'
       run: |
         bundle install
         bundle exec pod install
