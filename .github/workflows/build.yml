@@ -50,10 +50,10 @@ jobs:
       with:
         fetch-depth: 0
         
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+    # - name: Set up JDK 11
+    #   uses: actions/setup-java@v1
+    #   with:
+    #     java-version: 11
 
     # - name: Setup Ruby
     #   uses: ruby/setup-ruby@v1
@@ -83,7 +83,7 @@ jobs:
     - name: setup-cocoapods
       uses: maxim-lobanov/setup-cocoapods@v1
       with:
-        podfile-path: DevOpsPractices/Podfile.lock
+        podfile-path: ./Podfile.lock
 
     - name: Install Dependencies
       # if: steps.pods-cache.outputs.cache-hit != 'true'
@@ -109,13 +109,12 @@ jobs:
     - name: Slather
       run: |
         set -o pipefail
-          xcodebuild test-without-building \
+        xcodebuild \
           -workspace CSBootcamp.xcworkspace \
           -scheme CSBootcamp \
-          -destination 'platform=iOS Simulator,name=iPhone 12' \
-          -derivedDataPath '~/Library/Developer/Xcode/DerivedData' \
-          -enableCodeCoverage YES \
-          | xcpretty
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
+          test | xcpretty
 
         slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
 
