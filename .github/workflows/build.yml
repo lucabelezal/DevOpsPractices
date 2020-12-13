@@ -105,11 +105,10 @@ jobs:
         -workspace CSBootcamp.xcworkspace \
         -scheme CSBootcamp \
         -destination 'platform=iOS Simulator,name=iPhone 12' \
-        -derivedDataPath '~/Library/Developer/Xcode/DerivedData' \
         -enableCodeCoverage YES \
         | xcpretty
 
-        slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace CSBootcamp.xcodeproj --output-directory build/Coverage/
+        slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
 
       # env:
       #   project: 'CSBootcamp.xcodeproj'
@@ -121,7 +120,8 @@ jobs:
          
     # - name: SwiftLint
     #   run: |
-    #     fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
+    #     mkdir -p build/Lint/
+    #     fastlane run swiftlint output_file:"build/Lint/swiftlint.json" reporter:"json" ignore_exit_status:"true"
         
     - name: Run Sonar
       run: |
