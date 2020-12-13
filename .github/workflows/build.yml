@@ -46,7 +46,6 @@ jobs:
         rm -rf Gemfile.lock
         echo 'gem: --no-ri --no-rdoc' > ~/.gemrc
         gem install bundler
-        bundle config path vendor/bundle
         bundle install --without=documentation --jobs 4 --retry 3
 
     - name: Install Pod Dependencies
