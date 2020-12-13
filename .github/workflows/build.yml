@@ -47,6 +47,8 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
         
     - name: Set up JDK 11
       uses: actions/setup-java@v1
@@ -62,7 +64,6 @@ jobs:
       run: |
           set -o pipefail
           rm -rf Gemfile.lock
-          brew install sonar-scanner
           gem install bundler
 
     # - name: Cache RubyGems
@@ -79,11 +80,17 @@ jobs:
     #     path: Pods
     #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
+    - name: setup-cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+        podfile-path: DevOpsPractices/Podfile.lock
+
     - name: Install Dependencies
       # if: steps.pods-cache.outputs.cache-hit != 'true'
       run: |
         rm -rf Podfile.lock
         rm -rf Pods/
+        rm -rf ~/Library/Developer/Xcode/DerivedData
         bundle install
         bundle exec pod install
       env:
@@ -102,13 +109,13 @@ jobs:
     - name: Slather
       run: |
         set -o pipefail
-        xcodebuild test-without-building \
-        -workspace CSBootcamp.xcworkspace \
-        -scheme CSBootcamp \
-        -destination 'platform=iOS Simulator,name=iPhone 12' \
-        -derivedDataPath '~/Library/Developer/Xcode/DerivedData' \
-        -enableCodeCoverage YES \
-        | xcpretty
+          xcodebuild test-without-building \
+          -workspace CSBootcamp.xcworkspace \
+          -scheme CSBootcamp \
+          -destination 'platform=iOS Simulator,name=iPhone 12' \
+          -derivedDataPath '~/Library/Developer/Xcode/DerivedData' \
+          -enableCodeCoverage YES \
+          | xcpretty
 
         slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
 
@@ -124,12 +131,6 @@ jobs:
     #   run: |
     #     mkdir -p build/Lint/
     #     fastlane run swiftlint output_file:"build/Lint/swiftlint.json" reporter:"json" ignore_exit_status:"true"
-        
-    - name: Run Sonar
-      run: |
-        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Code coverage
       if: github.ref == 'refs/heads/develop'
@@ -137,4 +138,29 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./reports/cobertura.xml
+
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    # - name: Run Sonar
+    #   run: |
+    #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    #   env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+    # - name: Setup sonarqube
+    #   uses: warchant/setup-sonar-scanner@v3
+    # - name: Run sonarqube
+    #   env:
+    #     # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   run: sonar-scanner
+    #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    #       -Dsonar.organization=1corp
+    #       -Dsonar.host.url=https://sonarcloud.io/
+    #       -Dsonar.projectKey=sonar-scanner-action
+
 
