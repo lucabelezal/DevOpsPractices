@@ -65,7 +65,7 @@ jobs:
         params: '-enableCodeCoverage YES -sdk iphonesimulator'
         destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
 
-    - name: Slather
+    - name: Run Slather
       run: |        
         slather coverage --cobertura-xml --scheme "${scheme}" --workspace "${workspace}" --output-directory "${params}"
         slather coverage --sonarqube-xml --scheme "${scheme}" --workspace "${workspace}" --output-directory "${params}"
@@ -74,12 +74,12 @@ jobs:
         scheme: 'CSBootcamp'
         params: '--output-directory build/Coverage/'
          
-    - name: SwiftLint
+    - name: Run SwiftLint
       run: |
         mkdir -p build/Lint/
         fastlane run swiftlint output_file:"build/Lint/swiftlint.json" reporter:"json" ignore_exit_status:"true"
 
-    - name: Code coverage
+    - name: Send Codecov
       # if: github.ref == 'refs/heads/develop'
       uses: codecov/codecov-action@v1
       with:
@@ -98,13 +98,13 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-    # - name: Setup sonarqube
-    #   uses: warchant/setup-sonar-scanner@v3
-    # - name: Run sonarqube
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: sonar-scanner
-    #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-    #       -Dsonar.organization=skeleton
-    #       -Dsonar.projectKey=lucabelezal_DevOpsPractices
-    #       -Dsonar.host.url=https://sonarcloud.io/
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v3
+    - name: Run sonarqube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=skeleton
+          -Dsonar.projectKey=lucabelezal_DevOpsPractices
+          -Dsonar.host.url=https://sonarcloud.io/
