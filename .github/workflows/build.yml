@@ -62,7 +62,6 @@ jobs:
       run: |
           set -o pipefail
           brew install sonar-scanner
-          brew install swiftlint
           gem install bundler
 
     # - name: Cache RubyGems
@@ -82,7 +81,6 @@ jobs:
     - name: Install Dependencies
       # if: steps.pods-cache.outputs.cache-hit != 'true'
       run: |
-        bundle config
         bundle install
         bundle exec pod install
       env:
