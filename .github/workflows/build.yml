@@ -222,90 +222,80 @@ jobs:
   sonar:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         fetch-depth: 0
         
-    # - name: Set up JDK 11
-    #   uses: actions/setup-java@v1
-    #   with:
-    #     java-version: 11
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
 
-    # - name: Setup Ruby
-    #   uses: ruby/setup-ruby@v1
-    #   with:
-    #     ruby-version: 2.6.3
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.3
+  
+    - name: Gem cache
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-use-ruby-${{ hashFiles('**/Gemfile.lock') }}
 
-    - name: Prepare Dependency Managers
+    - name: Install Bundle Dependencies
       run: |
-          set -o pipefail
-          brew install sonar-scanner
-          rm -rf Gemfile.lock
-          gem install bundler
-    # - name: Cache RubyGems
-    #   uses: actions/cache@v1
-    #   with:
-    #     path: vendor/bundle
-    #     key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-    #     restore-keys: ${{ runner.os }}-gem-
+        set -o pipefail
+        rm -rf Gemfile.lock
+        gem install bundler --version 2.0.2 --no-ri --no-rdoc
+        bundle config path vendor/bundle
+        bundle install --without=documentation --jobs 4 --retry 3
+        brew install sonar-scanner
 
-    # - name: Cache Pods
-    #   uses: actions/cache@v1
-    #   id: pods-cache
-    #   with:
-    #     path: Pods
-    #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+    - name: Pods cache
+      uses: actions/cache@v2
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
-    - name: setup-cocoapods
+    - name: Setup Cocoapods
       uses: maxim-lobanov/setup-cocoapods@v1
       with:
         podfile-path: ./Podfile.lock
 
-    - name: Install Dependencies
-      # if: steps.pods-cache.outputs.cache-hit != 'true'
+    - name: Install Pod Dependencies
+      if: steps.pods-cache.outputs.cache-hit != 'true'
       run: |
         rm -rf Podfile.lock
         rm -rf Pods/
         rm -rf ~/Library/Developer/Xcode/DerivedData
         bundle install
         bundle exec pod install
-      env:
-         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-    # - name: Build and test
-    #   run: |
-    #     xcodebuild -version
-    #     xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
-    #   env:
-    #     workspace: 'CSBootcamp.xcworkspace'
-    #     params: '-derivedDataPath ~/Library/Developer/Xcode/DerivedData -enableCodeCoverage YES'
-    #     scheme: 'CSBootcamp'
-    #     destination: 'name=iPhone 11'
-
-    - name: Slather
+    - name: Build and test
       run: |
         set -o pipefail
-        xcodebuild \
-          -workspace CSBootcamp.xcworkspace \
-          -scheme CSBootcamp \
-          -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
-          test | xcpretty
-        
-        slather coverage --cobertura-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
-        slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
-      # env:
-      #   project: 'CSBootcamp.xcodeproj'
-      #   workspace: 'CSBootcamp.xcworkspace'
-      #   params: '--output-directory build/Coverage/ --scheme CSBootcamp'
-        # GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
-        # CI_PULL_REQUEST: ${{ github.event.number }}
-        # COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        xcodebuild -version
+        xcodebuild test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+      env:
+        workspace: 'CSBootcamp.xcworkspace'
+        scheme: 'CSBootcamp'
+        params: '-enableCodeCoverage YES -sdk iphonesimulator'
+        destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
+
+    - name: Slather
+      run: |        
+        slather coverage --cobertura-xml --scheme "${scheme}" --workspace "${workspace}" --output-directory "${params}"
+        slather coverage --sonarqube-xml --scheme "${scheme}" --workspace "${workspace}" --output-directory "${params}"
+      env:
+        workspace: 'CSBootcamp.xcworkspace'
+        scheme: 'CSBootcamp'
+        params: '--output-directory build/Coverage/'
          
-    # - name: SwiftLint
-    #   run: |
-    #     mkdir -p build/Lint/
-    #     fastlane run swiftlint output_file:"build/Lint/swiftlint.json" reporter:"json" ignore_exit_status:"true"
+    - name: SwiftLint
+      run: |
+        mkdir -p build/Lint/
+        fastlane run swiftlint output_file:"build/Lint/swiftlint.json" reporter:"json" ignore_exit_status:"true"
 
     - name: Code coverage
       if: github.ref == 'refs/heads/develop'
