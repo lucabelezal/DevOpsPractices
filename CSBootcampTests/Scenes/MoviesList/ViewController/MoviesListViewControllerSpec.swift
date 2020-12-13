@@ -22,7 +22,7 @@ class MoviesListViewControllerSpec: QuickSpec {
                     let expectedSubviews: [UIView] = [
                         viewController.collectionView,
                         viewController.activityIndicator,
-                        viewController.errorView
+                        viewController.errorView,
                     ]
                     expect(viewController.view.subviews)
                         .to(contain(expectedSubviews))

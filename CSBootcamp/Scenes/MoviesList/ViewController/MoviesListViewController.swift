@@ -73,7 +73,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
         return dataSource
     }()
 
-    // TODO
+    // TODO:
     lazy var searchBarDelegate: SearchBarDelegate = { // swiftlint:disable:this weak_delegate
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate
@@ -115,8 +115,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
 
     func didReachToScrollBottom() {
         let isSearching = searchBarDelegate.searchBarIsActive
-        if !isSearching,
-            case .list = state {
+        if case .list = state, !isSearching {
             page += 1
             fetchMovies(from: page)
         }

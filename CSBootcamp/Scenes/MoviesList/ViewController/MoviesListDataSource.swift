@@ -101,8 +101,9 @@ final class MoviesListDataSource: NSObject, UICollectionViewDataSource, UICollec
         case UICollectionView.elementKindSectionFooter:
 
             guard let footer = collectionView.dequeueReusableSupplementaryView(
-                    ActivityIndicatorFooterView.self,
-                    ofKind: UICollectionView.elementKindSectionFooter, for: indexPath) else {
+                ActivityIndicatorFooterView.self,
+                ofKind: UICollectionView.elementKindSectionFooter, for: indexPath
+            ) else {
                 return UICollectionReusableView()
             }
 

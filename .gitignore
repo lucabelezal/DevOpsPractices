@@ -9,8 +9,8 @@ build/
 vendor/
 .bundle
 DerivedData/
-Gemfile.lock
-Podfile.lock
+# Gemfile.lock
+# Podfile.lock
 
 ## Various settings
 *.pbxuser

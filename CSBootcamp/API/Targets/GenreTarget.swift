@@ -3,7 +3,7 @@ import Moya
 enum GenreTarget: TargetType {
     case list
 
-    // TODO
+    // TODO:
     var baseURL: URL {
         return APIBase.baseUrl! // swiftlint:disable:this force_unwrapping
     }

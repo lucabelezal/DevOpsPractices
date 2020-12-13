@@ -23,7 +23,7 @@ final class MoviesListInteractor: MoviesListInteractorType, MovieListFavoriteInt
 
     func fetchMovies(from page: Int) {
         moviesListGateway.fetchMovies(page: page) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             switch result {
             case let .success(movies):

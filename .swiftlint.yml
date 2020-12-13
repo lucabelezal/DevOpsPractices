@@ -6,6 +6,7 @@ excluded:
   - CSBootcampTests
   - fastlane
   - vendor
+  - Frameworks
 
 opt_in_rules:
   - closure_end_indentation

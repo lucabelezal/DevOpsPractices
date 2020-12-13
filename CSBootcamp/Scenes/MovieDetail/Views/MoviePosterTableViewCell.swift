@@ -80,7 +80,7 @@ public final class MoviePosterTableViewCell: UITableViewCell {
     }
 }
 
-public extension MoviePosterTableViewCell { // TODO
+public extension MoviePosterTableViewCell { // TODO:
     struct ViewModel {
         let imageURL: URL
         let title: String

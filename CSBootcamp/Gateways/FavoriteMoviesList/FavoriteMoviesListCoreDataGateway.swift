@@ -88,7 +88,7 @@ final class FavoriteMoviesListCoreDataGateway: FavoriteMoviesListGateway {
                 Movie(
                     id: Int(movieCoreData.id),
                     genreIds: movieCoreData.genres.map { genre in
-                        // TODO
+                        // TODO:
                         (genre as! GenreCoreData).id // swiftlint:disable:this force_cast
                     },
                     title: movieCoreData.title,
