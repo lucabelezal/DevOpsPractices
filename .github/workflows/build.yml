@@ -79,22 +79,39 @@ jobs:
     #   with:
     #     path: Pods
     #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: "2.6"
+
+    - name: Install Dependencies
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - run: gem install bundler -v 2.1.4
+    - run: bundle config path vendor/bundle
+    - run: bundle install --without=documentation --jobs 4 --retry 3
+    - run: |
+        rm -rf Podfile.lock
+        rm -rf Pods/
+        rm -rf ~/Library/Developer/Xcode/DerivedData
+        bundle exec pod install
 
     - name: setup-cocoapods
       uses: maxim-lobanov/setup-cocoapods@v1
       with:
         podfile-path: ./Podfile.lock
 
-    - name: Install Dependencies
-      # if: steps.pods-cache.outputs.cache-hit != 'true'
-      run: |
-        rm -rf Podfile.lock
-        rm -rf Pods/
-        rm -rf ~/Library/Developer/Xcode/DerivedData
-        bundle install
-        bundle exec pod install
-      env:
-         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Install Dependencies
+    #   # if: steps.pods-cache.outputs.cache-hit != 'true'
+    #   run: |
+    #     rm -rf Podfile.lock
+    #     rm -rf Pods/
+    #     rm -rf ~/Library/Developer/Xcode/DerivedData
+    #     bundle install
+    #     bundle exec pod install
       
     # - name: Build and test
     #   run: |
@@ -117,6 +134,7 @@ jobs:
           test | xcpretty
 
         slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
+        slather coverage --cobertura-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
 
       # env:
       #   project: 'CSBootcamp.xcodeproj'
@@ -138,28 +156,21 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./reports/cobertura.xml
 
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
     # - name: Run Sonar
     #   run: |
     #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
     #   env:
     #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-    # - name: Setup sonarqube
-    #   uses: warchant/setup-sonar-scanner@v3
-    # - name: Run sonarqube
-    #   env:
-    #     # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: sonar-scanner
-    #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-    #       -Dsonar.organization=1corp
-    #       -Dsonar.host.url=https://sonarcloud.io/
-    #       -Dsonar.projectKey=sonar-scanner-action
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v3
+    - name: Run sonarqube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=skeleton
+          -Dsonar.projectKey=lucabelezal_DevOpsPractices
+          -Dsonar.host.url=https://sonarcloud.io/
 
 
