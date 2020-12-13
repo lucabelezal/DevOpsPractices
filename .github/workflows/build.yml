@@ -290,6 +290,8 @@ jobs:
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
           test | xcpretty
+        
+        slather coverage --cobertura-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
         slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace --output-directory build/Coverage/
       # env:
       #   project: 'CSBootcamp.xcodeproj'
@@ -309,7 +311,7 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./reports/cobertura.xml
+        file: build/Coverage/cobertura.xml
 
     # - name: Run Sonar
     #   run: |
