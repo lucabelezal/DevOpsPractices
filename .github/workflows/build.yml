@@ -80,7 +80,7 @@ jobs:
         fastlane run swiftlint output_file:"build/Lint/swiftlint.json" reporter:"json" ignore_exit_status:"true"
 
     - name: Code coverage
-      if: github.ref == 'refs/heads/develop'
+      # if: github.ref == 'refs/heads/develop'
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -92,6 +92,7 @@ jobs:
         brew install sonar-scanner
 
     - name: Run Sonar
+      # if: github.ref == 'refs/heads/develop'
       run: |
         sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
