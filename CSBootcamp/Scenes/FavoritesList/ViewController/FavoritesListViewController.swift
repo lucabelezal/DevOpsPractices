@@ -36,7 +36,7 @@ final class FavoritesListViewController: UIViewController, FavoritesListView {
         return searchBar
     }()
 
-    // TODO
+    // TODO:
     lazy var searchBarDelegate: SearchBarDelegate = { // swiftlint:disable:this weak_delegate
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate

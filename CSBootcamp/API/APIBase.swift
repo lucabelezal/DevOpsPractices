@@ -5,7 +5,7 @@ struct APIBase {
 
     private static let imageBaseURL = URL(string: "https://image.tmdb.org/t/p/w500")
 
-    // TODO
+    // TODO:
     static func posterImageURL(path: String) -> URL {
         return imageBaseURL!.appendingPathComponent(path) // swiftlint:disable:this force_unwrapping
     }

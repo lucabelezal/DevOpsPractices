@@ -73,7 +73,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
         return dataSource
     }()
 
-    // TODO
+    // TODO:
     lazy var searchBarDelegate: SearchBarDelegate = { // swiftlint:disable:this weak_delegate
         let searchBarDelegate = SearchBarDelegate(searchBar: searchBar)
         return searchBarDelegate

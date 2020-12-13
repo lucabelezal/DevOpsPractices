@@ -3,7 +3,6 @@ xcodeproj: CsBootcamp.xcodeproj
 workspace: CsBootcamp.xcworkspace
 scheme: CSBootcamp
 input_format: profdata
-output_directory: Coverage/
-build_directory: build/Build/
+output_directory: build/Coverage/
 ignore:
   - CSBootcampTests/*

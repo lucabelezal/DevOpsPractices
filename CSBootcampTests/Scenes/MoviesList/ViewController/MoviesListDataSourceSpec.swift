@@ -13,7 +13,7 @@ class MoviesListDataSourceSpec: QuickSpec {
 
             context("when initialized") {
                 let viewModels = [
-                    MovieCollectionViewCell.ViewModel(imageURL: URL(string: "url.com")!, title: "", favoriteButtonImage: UIImage())
+                    MovieCollectionViewCell.ViewModel(imageURL: URL(string: "url.com")!, title: "", favoriteButtonImage: UIImage()),
                 ]
 
                 beforeEach {
