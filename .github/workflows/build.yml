@@ -53,10 +53,10 @@ jobs:
       with:
         java-version: 11
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6.3
+    # - name: Setup Ruby
+    #   uses: ruby/setup-ruby@v1
+    #   with:
+    #     ruby-version: 2.6.3
 
     - name: Prepare Dependency Managers
       run: |
@@ -88,15 +88,15 @@ jobs:
       env:
          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-    - name: Build and test
-      run: |
-        xcodebuild -version
-        xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
-      env:
-        workspace: 'CSBootcamp.xcworkspace'
-        params: '-derivedDataPath ~/Library/Developer/Xcode/DerivedData -enableCodeCoverage YES'
-        scheme: 'CSBootcamp'
-        destination: 'name=iPhone 11'
+    # - name: Build and test
+    #   run: |
+    #     xcodebuild -version
+    #     xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+    #   env:
+    #     workspace: 'CSBootcamp.xcworkspace'
+    #     params: '-derivedDataPath ~/Library/Developer/Xcode/DerivedData -enableCodeCoverage YES'
+    #     scheme: 'CSBootcamp'
+    #     destination: 'name=iPhone 11'
 
     - name: Slather
       run: |
@@ -111,17 +111,17 @@ jobs:
 
         slather coverage --sonarqube-xml --scheme CSBootcamp --workspace CSBootcamp.xcworkspace CSBootcamp.xcodeproj --output-directory build/Coverage/
 
-      env:
-        project: 'CSBootcamp.xcodeproj'
-        workspace: 'CSBootcamp.xcworkspace'
-        params: '--output-directory build/Coverage/ --scheme CSBootcamp'
+      # env:
+      #   project: 'CSBootcamp.xcodeproj'
+      #   workspace: 'CSBootcamp.xcworkspace'
+      #   params: '--output-directory build/Coverage/ --scheme CSBootcamp'
         # GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
         # CI_PULL_REQUEST: ${{ github.event.number }}
         # COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          
-    - name: SwiftLint
-      run: |
-        fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
+    # - name: SwiftLint
+    #   run: |
+    #     fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
         
     - name: Run Sonar
       run: |
