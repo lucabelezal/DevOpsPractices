@@ -89,11 +89,12 @@ jobs:
       
     - name: Build and test
       run: |
-        xcodebuild build test -workspace ${workspace} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild -version
+        xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
       env:
         workspace: 'CSBootcamp.xcworkspace'
         params: '-derivedDataPath ~/Library/Developer/Xcode/DerivedData -enableCodeCoverage YES'
-        scheme: CSBootcamp
+        scheme: 'CSBootcamp'
         destination: 'name=iPhone 11'
 
     - name: Slather
