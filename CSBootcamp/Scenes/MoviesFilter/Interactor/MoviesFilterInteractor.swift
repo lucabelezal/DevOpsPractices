@@ -41,7 +41,7 @@ final class MoviesFilterInteractor: MoviesFilterInteractorType {
 
     private func showFilterByGenres() {
         gateway.fetchGenres { [weak self] result in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
 

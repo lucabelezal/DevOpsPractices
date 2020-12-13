@@ -4,21 +4,36 @@ use_frameworks!
 inhibit_all_warnings!
 install! 'cocoapods', :warn_for_unused_master_specs_repo => false
 
+def style
+  pod 'SwiftFormat/CLI'
+  pod 'SwiftLint'
+end
+
+def test
+  pod 'Quick'
+  pod 'Nimble'
+  pod 'OHHTTPStubs/Swift'
+end
+
+def firebase
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Performance'
+end
+
 target 'CSBootcamp' do
   
   pod 'Kingfisher'
   pod 'Moya'
   pod 'SwiftLint'
   pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '6.0.10'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Performance'
+  firebase
+  style
 
   target 'CSBootcampTests' do
     inherit! :search_paths
-    pod 'Quick'
-    pod 'Nimble'
-    pod 'OHHTTPStubs/Swift'
+    style
+    test
   end
 end
 

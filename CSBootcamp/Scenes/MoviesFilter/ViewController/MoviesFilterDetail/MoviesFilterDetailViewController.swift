@@ -4,7 +4,8 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
     var selectedOptionIndex: Int? {
         willSet {
             if let index = selectedOptionIndex,
-                let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) {
+               let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0))
+            {
                 cell.accessoryType = .none
             }
         }
@@ -67,8 +68,7 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
     }
 
     func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let index = selectedOptionIndex,
-            index == indexPath.row {
+        if let index = selectedOptionIndex, index == indexPath.row {
             cell.accessoryType = .checkmark
         }
     }
@@ -79,8 +79,7 @@ final class MoviesFilterDetailViewController: UIViewController, UITableViewDataS
         let option = options[indexPath.row]
         cell.textLabel?.text = option
 
-        if let index = selectedOptionIndex,
-            indexPath.row == index {
+        if let index = selectedOptionIndex, indexPath.row == index {
             cell.accessoryType = .checkmark
             self.tableView(tableView, didSelectRowAt: indexPath)
         }

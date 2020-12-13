@@ -33,7 +33,7 @@ final class MovieDetailInteractor: MovieDetailInteractorType, MovieDetailFavorit
 
     func fetchDetail(of movie: Movie) {
         genresCacheGateway.fetchGenres(withIds: movie.genreIds) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if case let .success(genres) = result {
                 self.movie = movie
@@ -49,7 +49,7 @@ final class MovieDetailInteractor: MovieDetailInteractorType, MovieDetailFavorit
 
     func toggleMovieFavorite() {
         guard let movie = movie,
-            let genres = genres else { return }
+              let genres = genres else { return }
         let result = favoriteMoviesListGateway.toggleMovieFavorite(movie)
 
         if case .success = result {

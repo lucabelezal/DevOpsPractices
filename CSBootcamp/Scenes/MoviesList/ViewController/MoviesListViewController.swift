@@ -115,8 +115,7 @@ final class MoviesListViewController: UIViewController, MoviesListView, ShowMovi
 
     func didReachToScrollBottom() {
         let isSearching = searchBarDelegate.searchBarIsActive
-        if !isSearching,
-            case .list = state {
+        if case .list = state, !isSearching {
             page += 1
             fetchMovies(from: page)
         }

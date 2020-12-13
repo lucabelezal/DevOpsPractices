@@ -18,13 +18,13 @@ final class MoviesListSceneFactory {
     }
 }
 
-final class MoviesListGatewayFactory {
+enum MoviesListGatewayFactory {
     static func make() -> MoviesListGateway {
         return MoviesListMoyaGateway()
     }
 }
 
-final class FavoriteMoviesListGatewayFactory {
+enum FavoriteMoviesListGatewayFactory {
     static func make() -> FavoriteMoviesListGateway {
         return FavoriteMoviesListCoreDataGateway(coreDataStack: DefaultCoreDataStack.shared)
     }

@@ -128,6 +128,7 @@ PODS:
   - Sentry (6.0.10):
     - Sentry/Core (= 6.0.10)
   - Sentry/Core (6.0.10)
+  - SwiftFormat/CLI (0.47.8)
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
@@ -140,6 +141,7 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - Quick
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `6.0.10`)
+  - SwiftFormat/CLI
   - SwiftLint
 
 SPEC REPOS:
@@ -167,6 +169,7 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - Quick
+    - SwiftFormat
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -204,8 +207,9 @@ SPEC CHECKSUMS:
   Protobuf: 0cde852566359049847168e51bd1c690e0f70056
   Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
   Sentry: 0a48d832ce921578a0c31c68272382fbef9a1726
+  SwiftFormat: 30c4c1b17a6c0c911760ada94b1bdb40769c95b9
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: dd1c193ddc51c2d91ee7ceed8fea0c4eec5f5da2
+PODFILE CHECKSUM: ee0fedaace4b58789f36b6b6c2f8a358fcd2282a
 
 COCOAPODS: 1.10.0
