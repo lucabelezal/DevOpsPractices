@@ -100,9 +100,10 @@ jobs:
 
     - name: Slather
       run: |
-        slather coverage --sonarqube-xml ${params} ${workspace}
-        slather coverage --cobertura-xml ${params} ${workspace}
+        slather coverage --sonarqube-xml ${params} ${workspace} ${project}
+        slather coverage --cobertura-xml ${params} ${workspace} ${project}
       env:
+        project: 'CSBootcamp.xcodeproj'
         workspace: 'CSBootcamp.xcworkspace'
         params: '--output-directory build/Coverage/ --scheme CSBootcamp --binary-basename CSBootcamp'
         GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
