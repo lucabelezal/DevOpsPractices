@@ -3,45 +3,45 @@ on:
   push:
     branches:
     - master
-    # - develop
+    - develop
 jobs:
-  tests:
-    runs-on: macos-latest
-    continue-on-error: true
-    strategy:
-      fail-fast: false
-      # matrix:
-      #   include:
-      #   - destination: 'name=iPhone 11'
-      #     scheme: CSBootcamp
-      #     xcode: latest
-    steps:
-    - uses: actions/checkout@v2
+  # tests:
+  #   runs-on: macos-latest
+  #   continue-on-error: true
+  #   strategy:
+  #     fail-fast: false
+  #     # matrix:
+  #     #   include:
+  #     #   - destination: 'name=iPhone 11'
+  #     #     scheme: CSBootcamp
+  #     #     xcode: latest
+  #   steps:
+  #   - uses: actions/checkout@v2
                 
-    - name: Check Dependencie Cache
-      uses: actions/cache@v1
-      id: pods-cache
-      with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+  #   - name: Check Dependencie Cache
+  #     uses: actions/cache@v1
+  #     id: pods-cache
+  #     with:
+  #       path: Pods
+  #       key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
-    - name: Install Dependencies
-      # if: steps.pods-cache.outputs.cache-hit != 'true'
-      run: |
-        bundle install
-        bundle exec pod install
-      env:
-         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   - name: Install Dependencies
+  #     # if: steps.pods-cache.outputs.cache-hit != 'true'
+  #     run: |
+  #       bundle install
+  #       bundle exec pod install
+  #     env:
+  #        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-    - name: Build and test
-      run: |
-        xcodebuild -version
-        xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
-      env:
-        workspace: 'CSBootcamp.xcworkspace'
-        params: '-derivedDataPath ~/Library/Developer/Xcode/DerivedData -enableCodeCoverage YES'
-        scheme: 'CSBootcamp'
-        destination: 'name=iPhone 11'
+  #   - name: Build and test
+  #     run: |
+  #       xcodebuild -version
+  #       xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+  #     env:
+  #       workspace: 'CSBootcamp.xcworkspace'
+  #       params: '-derivedDataPath ~/Library/Developer/Xcode/DerivedData -enableCodeCoverage YES'
+  #       scheme: 'CSBootcamp'
+  #       destination: 'name=iPhone 11'
         
   sonar:
     runs-on: macos-latest
