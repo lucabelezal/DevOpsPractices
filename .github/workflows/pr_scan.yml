@@ -50,7 +50,7 @@ jobs:
         slather coverage --sonarqube-xml ${params} ${workspace}
       env:
         workspace: 'CSBootcamp.xcworkspace'
-        params: '--build-directory ./DerivedData --output-directory ./reports --scheme CSBootcamp --binary-basename CSBootcamp'
+        params: '--build-directory ./DerivedData --output-directory ./reports'
 
     - name: SwiftLint
       run: |
