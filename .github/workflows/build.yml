@@ -90,13 +90,6 @@ jobs:
       run: |
         set -o pipefail
         brew install sonar-scanner
-
-    - name: Run Sonar
-      # if: github.ref == 'refs/heads/develop'
-      run: |
-        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
     - name: Setup sonarqube
       uses: warchant/setup-sonar-scanner@v3
@@ -108,3 +101,10 @@ jobs:
           -Dsonar.organization=skeleton
           -Dsonar.projectKey=lucabelezal_DevOpsPractices
           -Dsonar.host.url=https://sonarcloud.io/
+
+    - name: Run Sonar
+      # if: github.ref == 'refs/heads/develop'
+      run: |
+        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
