@@ -82,7 +82,6 @@ jobs:
         # bundle exec slather coverage --sonarqube-xml ${workspace} ${params}
         set -o pipefail
         bundle exec slather coverage 
-        --github \
         --sonarqube-xml \
         --build-directory ./build \
         --output-directory ./sonar-reports \
@@ -98,7 +97,6 @@ jobs:
         --workspace CSBootcamp.xcworkspace
 
         bundle exec slather coverage 
-        --github \
         --llvm-cov \
         --build-directory ./build \
         --output-directory ./sonar-reports \
@@ -106,7 +104,6 @@ jobs:
         --workspace CSBootcamp.xcworkspace
 
         bundle exec slather coverage 
-        --github \
         --llvm-cov \
         --build-directory ./reports \
         --output-directory ./sonar-reports \
