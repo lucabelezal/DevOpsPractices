@@ -60,6 +60,11 @@ jobs:
       run: |
         bundle exec pod install
       
+    - name: Run SwiftLint
+      run: |
+        mkdir -p build/Lint/
+        fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
+        
     - name: Build and test
       run: |
         set -o pipefail
@@ -92,22 +97,10 @@ jobs:
         --scheme CSBootcamp \
         --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
-
-        bundle exec slather coverage --llvm-cov \
-        --output-directory ./reports \
-        --scheme CSBootcamp \
-        --binary-basename CSBootcamp \
-        --workspace CSBootcamp.xcworkspace
-        
       env:
         workspace: 'CSBootcamp.xcworkspace'
         params: '-scheme CSBootcamp --output-directory ./reports'
          
-    - name: Run SwiftLint
-      run: |
-        mkdir -p build/Lint/
-        fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
-
     - name: Send Codecov
       # if: github.ref == 'refs/heads/develop'
       uses: codecov/codecov-action@v1
@@ -120,16 +113,16 @@ jobs:
         set -o pipefail
         brew install sonar-scanner
           
-    # - name: Setup sonarqube
-    #   uses: warchant/setup-sonar-scanner@v3
-    # - name: Run sonarqube
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: sonar-scanner
-    #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-    #       -Dsonar.organization=skeleton
-    #       -Dsonar.projectKey=lucabelezal_DevOpsPractices
-    #       -Dsonar.host.url=https://sonarcloud.io/
+    - name: Setup sonarqube
+      uses: warchant/setup-sonar-scanner@v3
+    - name: Run sonarqube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=skeleton
+          -Dsonar.projectKey=lucabelezal_DevOpsPractices
+          -Dsonar.host.url=https://sonarcloud.io/
 
     - name: Run Sonar
       # if: github.ref == 'refs/heads/develop'
