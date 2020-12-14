@@ -65,7 +65,7 @@ jobs:
         set -o pipefail
         xcodebuild -version
         xcodebuild -workspace 'CSBootcamp.xcworkspace' \
-        -scheme CSBootcamp -derivedDataPath build/ \
+        -scheme CSBootcamp -derivedDataPath ./DerivedData \
         -enableCodeCoverage YES clean build test \
         -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
         | xcpretty && exit ${PIPESTATUS[0]}
