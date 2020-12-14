@@ -80,22 +80,19 @@ jobs:
       run: |        
         set -o pipefail
 
-        bundle exec slather coverage \
-        --sonarqube-xml \
+        bundle exec slather coverage --sonarqube-xml \
         --build-directory ./reports \
         --output-directory ./sonar-reports \
         --scheme CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
-        bundle exec slather coverage \
-        --cobertura-xml \
+        bundle exec slather coverage --cobertura-xml \
         --build-directory ./reports \
         --output-directory ./sonar-reports \
         --scheme CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
-        bundle exec slather coverage \
-        --llvm-cov \
+        bundle exec slather coverage --llvm-cov \
         --build-directory ./reports \
         --output-directory ./sonar-reports \
         --scheme CSBootcamp \
