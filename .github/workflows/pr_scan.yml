@@ -4,69 +4,63 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    env:
-      sonarToken: ${{ secrets.SONAR_TOKEN }}
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
         
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.2
-
-    - name: Install Tools
-      run: |
-        brew install sonar-scanner
-        brew install swiftlint
-        gem install slather
-
-    - name: Check Dependencie Cache
+  
+    - name: Gem cache
       uses: actions/cache@v2
-      id: pods-cache
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-use-ruby-${{ hashFiles('**/Gemfile.lock') }}
+
+    - name: Pods cache
+      uses: actions/cache@v2
       with:
         path: Pods
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
-    - name: Install Dependencies
-      if: steps.pods-cache.outputs.cache-hit != 'true'
-      run: |
-        bundle install
-        bundle exec pod install
+    - name: Setup Cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+        podfile-path: ./Podfile.lock
 
+    - name: Install Bundle Dependencies
+      run: |
+        set -o pipefail
+        rm -rf ~/Library/Developer/Xcode/DerivedData
+        rm -rf Pods/
+        rm -rf Podfile.lock
+        rm -rf Gemfile.lock
+        gem install bundler
+        bundle install
+
+    - name: Install Pod Dependencies
+      run: |
+        bundle exec pod install
+      
     - name: Build and test
       run: |
+        set -o pipefail
         xcodebuild -version
-        xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
-      env:
-        workspace: 'CSBootcamp.xcworkspace'
-        params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
-        scheme: 'CSBootcamp'
-        destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
-        DEVELOPER_DIR: ${{ matrix.xcode }}
+        xcodebuild -workspace 'CSBootcamp.xcworkspace' \
+        -scheme CSBootcamp \
+        -enableCodeCoverage YES clean build test \
+        -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
+        | xcpretty && exit ${PIPESTATUS[0]}
 
-    - name: Slather
+    - name: Run SwiftLint
       run: |
-        slather coverage --sonarqube-xml ${params} ${workspace}
-      env:
-        workspace: 'CSBootcamp.xcworkspace'
-        params: '-scheme CSBootcamp --build-directory ./DerivedData --output-directory ./reports'
-
-    - name: SwiftLint
-      run: |
+        mkdir -p build/Lint/
         fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
 
-    - name: Run Sonar
-      if: ${{ env.sonarToken != 0 }}
-      run: |
-        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
