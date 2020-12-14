@@ -6,6 +6,7 @@
 ## Build generated
 Coverage/
 build/
+reports/
 vendor/
 .bundle
 DerivedData/
