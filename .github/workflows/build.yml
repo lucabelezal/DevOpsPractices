@@ -7,6 +7,14 @@ on:
 jobs:        
   ci:
     runs-on: macos-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
+          scheme: CSBootcamp
+          xcode: latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -58,12 +66,11 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild -version
-        xcodebuild test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${matrix.destination}" | xcpretty && exit ${PIPESTATUS[0]}
       env:
         workspace: 'CSBootcamp.xcworkspace'
         scheme: 'CSBootcamp'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES -sdk iphonesimulator'
-        destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
 
     - name: Run Slather
       run: |        
