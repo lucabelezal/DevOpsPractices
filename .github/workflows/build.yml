@@ -69,7 +69,6 @@ jobs:
         xcodebuild -workspace 'CSBootcamp.xcworkspace' \
         -scheme CSBootcamp -derivedDataPath build/ 
         -enableCodeCoverage YES clean build test \
-        CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
         -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
         | xcpretty && exit ${PIPESTATUS[0]}
 
