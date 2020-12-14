@@ -64,10 +64,8 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild -version
-        # xcodebuild test -workspace ${workspace} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
-
         xcodebuild -workspace 'CSBootcamp.xcworkspace' \
-        -scheme CSBootcamp -derivedDataPath build/ 
+        -scheme CSBootcamp \
         -enableCodeCoverage YES clean build test \
         -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
         | xcpretty && exit ${PIPESTATUS[0]}
@@ -76,48 +74,34 @@ jobs:
         workspace: 'CSBootcamp.xcworkspace'
         scheme: ${{ matrix.scheme }}
         destination: ${{ matrix.destination }}
-        params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES -sdk iphonesimulator'
+        params: '-enableCodeCoverage YES -sdk iphonesimulator'
 
     - name: Run Slather
       run: |        
-        # bundle exec slather coverage --cobertura-xml ${workspace} ${params}
-        # bundle exec slather coverage --sonarqube-xml ${workspace} ${params}
         set -o pipefail
-        bundle exec slather coverage 
-        --github \
-        --sonarqube-xml \
-        --build-directory ./build \
-        --output-directory ./sonar-reports \
+        mkdir -p reports
+
+        bundle exec slather coverage --sonarqube-xml \
+        --output-directory ./reports \
         --scheme CSBootcamp \
+        --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
-        set -o pipefail
-        bundle exec slather coverage 
-        --sonarqube-xml \
-        --build-directory ./reports \
-        --output-directory ./sonar-reports \
+        bundle exec slather coverage --cobertura-xml \
+        --output-directory ./reports \
         --scheme CSBootcamp \
+        --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
-        bundle exec slather coverage 
-        --github \
-        --llvm-cov \
-        --build-directory ./build \
-        --output-directory ./sonar-reports \
+        bundle exec slather coverage --llvm-cov \
+        --output-directory ./reports \
         --scheme CSBootcamp \
-        --workspace CSBootcamp.xcworkspace
-
-        bundle exec slather coverage 
-        --github \
-        --llvm-cov \
-        --build-directory ./reports \
-        --output-directory ./sonar-reports \
-        --scheme CSBootcamp \
+        --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
         
       env:
         workspace: 'CSBootcamp.xcworkspace'
-        params: '-scheme CSBootcamp --build-directory ./DerivedData --output-directory ./reports'
+        params: '-scheme CSBootcamp --output-directory ./reports'
          
     - name: Run SwiftLint
       run: |

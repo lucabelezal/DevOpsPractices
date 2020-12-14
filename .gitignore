@@ -6,6 +6,8 @@
 ## Build generated
 Coverage/
 build/
+reports/
+sonar-reports/
 vendor/
 .bundle
 DerivedData/
