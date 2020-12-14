@@ -37,7 +37,7 @@ jobs:
     - name: Build and test
       run: |
         xcodebuild -version
-        xcodebuild build test -xcworkspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild build test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
       env:
         workspace: 'CSBootcamp.xcworkspace'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
