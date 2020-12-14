@@ -74,7 +74,7 @@ jobs:
         workspace: 'CSBootcamp.xcworkspace'
         scheme: ${{ matrix.scheme }}
         destination: ${{ matrix.destination }}
-        params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES -sdk iphonesimulator'
+        params: '-enableCodeCoverage YES -sdk iphonesimulator'
 
     - name: Run Slather
       run: |        
@@ -82,26 +82,23 @@ jobs:
         mkdir -p reports
 
         bundle exec slather coverage --sonarqube-xml \
-        --build-directory ./DerivedData \
         --output-directory ./reports \
         --scheme CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
         bundle exec slather coverage --cobertura-xml \
-        --build-directory ./DerivedData \
         --output-directory ./reports \
         --scheme CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
         bundle exec slather coverage --llvm-cov \
-        --build-directory ./DerivedData \
         --output-directory ./reports \
         --scheme CSBootcamp \
         --workspace CSBootcamp.xcworkspace
         
       env:
         workspace: 'CSBootcamp.xcworkspace'
-        params: '-scheme CSBootcamp --build-directory ./DerivedData --output-directory ./reports'
+        params: '-scheme CSBootcamp --output-directory ./reports'
          
     - name: Run SwiftLint
       run: |
