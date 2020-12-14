@@ -27,7 +27,7 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6.3
+        ruby-version: 2.7.2
   
     - name: Gem cache
       uses: actions/cache@v2
@@ -64,17 +64,58 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild -version
-        xcodebuild test -workspace ${workspace} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+        # xcodebuild test -workspace ${workspace} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
+
+        xcodebuild -workspace 'CSBootcamp.xcworkspace' \
+        -scheme CSBootcamp -derivedDataPath build/ 
+        -enableCodeCoverage YES clean build test \
+        CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+        -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
+        | xcpretty && exit ${PIPESTATUS[0]}
+
       env:
         workspace: 'CSBootcamp.xcworkspace'
-        scheme: ${{ matrix.target }}
+        scheme: ${{ matrix.scheme }}
         destination: ${{ matrix.destination }}
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES -sdk iphonesimulator'
 
     - name: Run Slather
       run: |        
-        bundle exec slather coverage --cobertura-xml ${workspace} ${params}
-        bundle exec slather coverage --sonarqube-xml ${workspace} ${params}
+        # bundle exec slather coverage --cobertura-xml ${workspace} ${params}
+        # bundle exec slather coverage --sonarqube-xml ${workspace} ${params}
+        set -o pipefail
+        bundle exec slather coverage 
+        --github \
+        --sonarqube-xml \
+        --build-directory ./build \
+        --output-directory ./sonar-reports \
+        --scheme CSBootcamp \
+        --workspace CSBootcamp.xcworkspace
+
+        set -o pipefail
+        bundle exec slather coverage 
+        --sonarqube-xml \
+        --build-directory ./reports \
+        --output-directory ./sonar-reports \
+        --scheme CSBootcamp \
+        --workspace CSBootcamp.xcworkspace
+
+        bundle exec slather coverage 
+        --github \
+        --llvm-cov \
+        --build-directory ./build \
+        --output-directory ./sonar-reports \
+        --scheme CSBootcamp \
+        --workspace CSBootcamp.xcworkspace
+
+        bundle exec slather coverage 
+        --github \
+        --llvm-cov \
+        --build-directory ./reports \
+        --output-directory ./sonar-reports \
+        --scheme CSBootcamp \
+        --workspace CSBootcamp.xcworkspace
+        
       env:
         workspace: 'CSBootcamp.xcworkspace'
         params: '-scheme CSBootcamp --build-directory ./DerivedData --output-directory ./reports'
