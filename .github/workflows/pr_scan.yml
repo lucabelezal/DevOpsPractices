@@ -15,20 +15,14 @@ jobs:
       with:
         java-version: 11
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6.3
-
-    - name: Prepare Dependency Managers
+    - name: Install Tools
       run: |
-          set -o pipefail
-          brew install sonar-scanner
-          brew install swiftlint
-          gem install bundler -v
+        brew install sonar-scanner
+        brew install swiftlint
+        gem install slather
 
     - name: Check Dependencie Cache
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       id: pods-cache
       with:
         path: Pods
@@ -39,29 +33,24 @@ jobs:
       run: |
         bundle install
         bundle exec pod install
-      env:
-         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and test
       run: |
         xcodebuild -version
-        xcodebuild build test -xcworkspace "${xcworkspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild build test -xcworkspace "${workspace}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
       env:
-        xcworkspace: 'CSBootcamp.xcworkspace'
+        workspace: 'CSBootcamp.xcworkspace'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: 'CSBootcamp'
-        destination: 'name=iPhone 11'
+        destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
         DEVELOPER_DIR: ${{ matrix.xcode }}
 
     - name: Slather
       run: |
-        slather coverage --sonarqube-xml ${params} ${xcworkspace}
+        slather coverage --sonarqube-xml ${params} ${workspace}
       env:
-        xcworkspace: 'CSBootcamp.xcworkspace'
-        params: '--build-directory ./DerivedData
-        --output-directory ./reports
-        --scheme CSBootcamp
-        --binary-basename CSBootcamp'
+        workspace: 'CSBootcamp.xcworkspace'
+        params: '--build-directory ./DerivedData --output-directory ./reports --scheme CSBootcamp --binary-basename CSBootcamp'
 
     - name: SwiftLint
       run: |
