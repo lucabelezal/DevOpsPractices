@@ -84,16 +84,19 @@ jobs:
         bundle exec slather coverage --sonarqube-xml \
         --output-directory ./reports \
         --scheme CSBootcamp \
+        --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
         bundle exec slather coverage --cobertura-xml \
         --output-directory ./reports \
         --scheme CSBootcamp \
+        --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
 
         bundle exec slather coverage --llvm-cov \
         --output-directory ./reports \
         --scheme CSBootcamp \
+        --binary-basename CSBootcamp \
         --workspace CSBootcamp.xcworkspace
         
       env:
