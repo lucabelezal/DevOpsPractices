@@ -7,7 +7,6 @@ on:
 jobs:        
   ci:
     runs-on: macos-latest
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -66,11 +65,13 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild -version
-        xcodebuild test -workspace "${workspace}" -scheme "${scheme}" ${params} -destination "${matrix.destination}" | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild test -workspace ${workspace} -scheme "${scheme}" -destination "${destination}" ${params} | xcpretty && exit ${PIPESTATUS[0]}
       env:
         workspace: 'CSBootcamp.xcworkspace'
-        scheme: 'CSBootcamp'
+        scheme: ${{ matrix.target }}
+        destination: ${{ matrix.destination }}
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES -sdk iphonesimulator'
+        DEVELOPER_DIR: ${{ matrix.xcode }}
 
     - name: Run Slather
       run: |        
