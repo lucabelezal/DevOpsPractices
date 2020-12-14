@@ -1,6 +1,10 @@
 # DevOpsPractices
 
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=alert_status)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=coverage)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=security_rating)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
 
 # Setup
 
