@@ -92,6 +92,7 @@ jobs:
         params: '-enableCodeCoverage YES -sdk iphonesimulator'
 
     - name: Run Slather
+      if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
       run: |        
         set -o pipefail
         mkdir -p reports
