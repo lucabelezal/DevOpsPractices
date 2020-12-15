@@ -5,6 +5,8 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=security_rating)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lucabelezal_DevOpsPractices&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lucabelezal_DevOpsPractices)
+https://www.code-inspector.com/project/17046/score/svg
+https://www.code-inspector.com/project/17046/status/svg
 
 # Setup
 
