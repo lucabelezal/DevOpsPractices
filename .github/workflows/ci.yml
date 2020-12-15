@@ -119,33 +119,13 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./reports/cobertura.xml
 
-    # - name: Install SonarQube
-    #   if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
-    #   run: |
-    #     set -o pipefail
-    #     brew install sonar-scanner
-
     - name: Setup SonarQube
       if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
       uses: warchant/setup-sonar-scanner@v3
-      
-    - name: Run sonarqube
+
+    - name: Run SonarQube
       if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+      run: |
+        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: sonar-scanner
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.organization=skeleton
-          -Dsonar.projectKey=lucabelezal_DevOpsPractices
-          -Dsonar.host.url=https://sonarcloud.io/
-
-    # - name: Setup SonarQube
-    #   if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
-    #   uses: warchant/setup-sonar-scanner@v3
-
-    # - name: Run SonarQube
-    #   if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
-    #   run: |
-    #     sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-    #   env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
