@@ -129,3 +129,19 @@ jobs:
         sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Run Code Inspector
+      if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+      id: code-inspector
+      uses: codeinspectorio/github-action@master
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        code_inspector_access_key: ${{ secrets.CODE_INSPECTOR_ACCESS_KEY }}
+        code_inspector_secret_key: ${{ secrets.CODE_INSPECTOR_SECRET_KEY }}
+        min_quality_grade: 'WARNING'
+        min_quality_score: '50'
+        max_defects_rate: '0.0001'
+        max_complex_functions_rate: '0.0001'
+        max_long_functions_rate: '0.0001'
+        project_name: ''
+        max_timeout_sec: '600'
