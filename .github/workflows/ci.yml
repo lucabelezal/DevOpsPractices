@@ -14,60 +14,134 @@ on:
       - bugfix/*
       - fix/*
 jobs:
-  build:
-    name: Run Build and Unit Tests
+  ci:
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - destination: 'platform=iOS Simulator,name=iPhone 11,OS=latest'
+          scheme: CSBootcamp
+          workspace: CSBootcamp.xcworkspace
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+  
+    - name: Gem cache
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-use-ruby-${{ hashFiles('**/Gemfile.lock') }}
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.6.3
+    - name: Pods cache
+      uses: actions/cache@v2
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
 
-      - name: Install Dependencies
-        run: |
-          set -o pipefail
-          brew install sonar-scanner
-          brew install swiftlint
-          gem install bundler:2.1.4
-          bundle install
-          bundle exec pod install
+    - name: Setup Cocoapods
+      uses: maxim-lobanov/setup-cocoapods@v1
+      with:
+        podfile-path: ./Podfile.lock
 
-      - name: Run SwiftLint
-        run: |
-          set -o pipefail
-          bundle exec fastlane run_swiftlint
+    - name: Install Bundle Dependencies
+      run: |
+        set -o pipefail
+        rm -rf ~/Library/Developer/Xcode/DerivedData
+        rm -rf Pods/
+        rm -rf Podfile.lock
+        rm -rf Gemfile.lock
+        gem install bundler
+        bundle install
 
-      - name: Run Build
-        run: |
-          set -o pipefail
-          bundle exec fastlane run_build_app
+    - name: Install Pod Dependencies
+      run: |
+        bundle exec pod install
+      
+    - name: Run SwiftLint
+      run: |
+        mkdir -p build/Lint/
+        fastlane run swiftlint output_file:"./reports/swiftlint.json" reporter:"json" ignore_exit_status:"true"
+        
+    - name: Build and test
+      run: |
+        set -o pipefail
+        xcodebuild -version
+        xcodebuild -workspace ${workspace} \
+        -scheme ${scheme} \
+        -enableCodeCoverage YES clean build test \
+        -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest' \
+        | xcpretty && exit ${PIPESTATUS[0]}
 
-      - name: Run Tests
-        run: |
-          set -o pipefail
-          bundle exec fastlane run_tests_app
-    
-      - name: Run Slather
-        run: |
-          set -o pipefail
-          bundle exec fastlane run_slather
+      env:
+        workspace: ${{ matrix.workspace }}
+        scheme: ${{ matrix.scheme }}
+        destination: ${{ matrix.destination }}
+        params: '-enableCodeCoverage YES -sdk iphonesimulator'
 
-      - name: Send to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./reports/cobertura.xml
+    - name: Run Slather
+      run: |        
+        set -o pipefail
+        mkdir -p reports
 
-      - name: Send Reports to Sonar
-        run: |
-          sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        bundle exec slather coverage --sonarqube-xml \
+        ${params} \
+        --scheme ${scheme} \
+        --binary-basename ${scheme} \
+        --workspace ${workspace}
+
+        bundle exec slather coverage --cobertura-xml \
+        ${params} \
+        --scheme ${scheme} \
+        --binary-basename ${scheme} \
+        --workspace ${workspace}
+      env:
+        scheme: ${{ matrix.scheme }}
+        workspace: ${{ matrix.workspace }}
+        params: '--output-directory ./reports'
+         
+    - name: Send Codecov
+      if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./reports/cobertura.xml
+
+    - name: Install SonarQube
+      if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+      run: |
+        set -o pipefail
+        brew install sonar-scanner
+          
+    - name: Setup SonarQube
+      if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+      uses: warchant/setup-sonar-scanner@v3
+
+    # - name: Run sonarqube
+    #   if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   run: sonar-scanner
+    #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    #       -Dsonar.organization=skeleton
+    #       -Dsonar.projectKey=lucabelezal_DevOpsPractices
+    #       -Dsonar.host.url=https://sonarcloud.io/
+
+    - name: Run SonarQube
+      if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+      run: |
+        sonar-scanner -X -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
