@@ -321,6 +321,7 @@ DEPENDENCIES
   fastlane-plugin-firebase_app_distribution
   fastlane-plugin-sentry
   fastlane-plugin-versioning
+  nokogiri (>= 1.11.0.rc4)!
   openssl!
   pry!
   slather!

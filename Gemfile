@@ -7,6 +7,7 @@ source 'https://rubygems.org' do
     gem 'slather'
     gem 'openssl'
     gem 'pry'
+    gem "nokogiri", ">= 1.11.0.rc4"
 end
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
